@@ -1,5 +1,9 @@
 # Synesthesia Documentation Guide
 
+Documentation for [Synesthesia](https://synesthesia.live/), the All-in-One Music Visual Solution. Check out the live documentation [here](https://app.synesthesia.live/docs/).
+
+The Synesthesia team would love your help in developing these docs!
+
 ## Dependencies
 
 [MKDocs](https://www.mkdocs.org/) — the library used to create the docs
