@@ -38,7 +38,7 @@ The docs are styled using sass. Edit the `sass_input.scss` file in the `styleshe
 
 You can also run `npm run style`, or `npm run start`. This will update with live changes as you save `sass_input.scss`.
 
-# Creating New Pages
+## Creating New Pages
 
 1. Create a new markdown file in the proper folder
 2. Add this file path to the nav section in `mkdocs.yml`

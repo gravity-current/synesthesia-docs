@@ -76,7 +76,7 @@ Perhaps even more important than Audio Reactivity are the controls. Synesthesia 
 
 - Use `> 0.5` rather than `== 1.0` because sometimes a Uniform (or any float value) will be slightly off of it's true "1.0" because it gets lost in conversion from CPU to GPU, so it'll be something like "0.9999937". > is a safer test.
 
-Best way to learn is expeirmenting with existing scenes:
+Best way to learn is experimenting with existing scenes:
 
 - Change the values of numbers in the code.
 - Change multiplication to addition or subtraction to division.
