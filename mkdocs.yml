@@ -1,0 +1,54 @@
+site_name: Synesthesia Docs
+site_url: 'http://synesthesia.live'
+theme: 
+  name: material
+  logo: src/images/logo_square.png
+  favicon: src/images/logo_square.png
+use_directory_urls: false
+nav:
+- Introduction: 'index.md'
+- Quick Links:
+  - 'SSF Audio Uniforms': 'ssf/audio_uniforms.md'
+  - 'SSF Standard Uniforms': 'ssf/standard_uniforms.md'
+  - 'SSF Functions': 'ssf/functions.md'
+  - 'JSON Configuration': 'ssf/json.md'
+- FAQ:
+  - 'General': 'faq/index.md'
+  - 'Troubleshooting': 'faq/troubleshooting.md'
+  - 'License': 'faq/license.md'
+  - 'Audio':  'faq/audio.md'
+  - 'Video': 'faq/video.md'
+  - 'Settings': 'faq/settings.md'
+  - 'MIDI & OSC': 'faq/midi_osc.md'
+- SSF Documentation:
+  - 'Synesthesia Shader Format (SSF)': 'ssf/ssf.md'
+  - 'SSF Audio Uniforms': 'ssf/audio_uniforms.md'
+  - 'SSF Standard Uniforms': 'ssf/standard_uniforms.md'
+  - 'SSF Functions': 'ssf/functions.md'
+  - 'JSON Configuration': 'ssf/json.md'
+  - 'JavaScript Scripting': 'ssf/script.md'
+- Synesthesia Manual:
+  - 'Control Hotkeys': 'manual/control_hotkeys.md'
+  - 'OSC': 'manual/osc.md'
+- Tutorials:
+  - 'External Links': 'tutorials/links.md'
+  - 'Quickstart Guide': 'tutorials/quickstart_guide.md'
+  - 'Creating Your First Scene': 'tutorials/first_scene.md'
+  - 'How to Use Presets, Favslots, and Playlists': 'tutorials/presets_favslots_playlists.md'
+  - 'How to Use Control Hotkeys': 'tutorials/control_hotkeys.md'
+  - 'How to Add Audio Reactive Visuals to a Livestream with OBS': 'tutorials/livestream.md'
+  - 'How to Manually Convert from Shadertoy.com to SSF': 'tutorials/shadertoy_conversion.md'
+  - 'How to Update Controls and Use Event Handlers with JavaScript': 'tutorials/1.19_javascript.md'
+  - 'v1.16 Feature Walkthrough': 'tutorials/1.16_walkthrough.md'
+- Resources:
+  - 'Synesthesia Installers': 'resources/syn_installers.md'
+  - 'Synesthesia Changelogs': 'resources/changelogs.md'
+  - 'Synesthesia Resources': 'resources/syn_resources.md'
+  - 'GLSL Resources': 'resources/glsl_resources.md'
+plugins:
+  - search
+  - mkdocs-video
+markdown_extensions:
+  - codehilite
+extra_css:
+  - stylesheets/sass_output.css

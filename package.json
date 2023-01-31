@@ -1,0 +1,25 @@
+{
+  "name": "synesthesia-docs",
+  "version": "1.0.0",
+  "description": "Documentation for Synesthesia",
+  "main": "server/app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "serve": "mkdocs serve --dev-addr 127.0.0.1:9999",
+    "style": "sass --watch docs/stylesheets/sass_input.scss docs/stylesheets/sass_output.css",
+    "build": "./build-docs.sh",
+    "start": "(trap 'kill 0' INT TERM; npm run style & npm run serve)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gravity-current/synesthesia-docs.git"
+  },
+  "author": "Gravity Current",
+  "homepage": "https://github.com/gravity-current/synesthesia-docs#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "sass": "^1.53.0"
+  }
+}
