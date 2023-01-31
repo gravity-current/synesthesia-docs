@@ -27,6 +27,7 @@ nav:
   - 'SSF Functions': 'ssf/functions.md'
   - 'JSON Configuration': 'ssf/json.md'
   - 'JavaScript Scripting': 'ssf/script.md'
+  - 'Best Practices': 'ssf/best_practices.md'
 - Synesthesia Manual:
   - 'Control Hotkeys': 'manual/control_hotkeys.md'
   - 'OSC': 'manual/osc.md'

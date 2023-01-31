@@ -1,6 +1,6 @@
 # SSF Best Practices
 
-Here are some of the best practices we've come to over the years of working with Synesthesia and performing with Scenes at live events.
+Here are some of the best practices our team has come to over the years of working with Synesthesia and performing with Scenes at live events.
 
 ### Audio Reactivity
 
@@ -34,16 +34,16 @@ uv += _rotate(vec2(0.0, 1.0), 2*PI*texture(syn_Spectrum, _uv.y).g)*0.01;
 
 You can use the [Audio Reactive Uniforms](ssf/audio_uniforms.md) page for reference to see all our audio uniforms.
 
-Basic color flashing is always an easy place to start, but I usually try to look for deeper or novel ways to add audio reactivity to a Scene I'm working on. Some questions that can help you:
+Basic color flashing is always an easy place to start, but it's usually good to try to look for deeper or novel ways to add audio reactivity to a Scene. Some questions that can help you:
 
 - What is unique about this scene, that I can highlight with audio reactivity?
 - What parts of the scene seem boring right now, that I can use the audio to add some life to?
 
-Unfortunately, there is some natural tradeoff between hardcoded audio reactivity and allowing a user to perform with the music in the way *they want to*. So in certain cases too much audio reactivity can be a nuisance. It needs to be carefully balanced. However, I usually find that in these cases you can simply add a toggle to the control panel that turns the audio reactivity on and off. Then you've got the best of both worlds and users can decide whether the audio animation fit the mood of the music or not.
+Unfortunately, there is some natural tradeoff between hardcoded audio reactivity and allowing a user to perform with the music in the way *they want to*. So in certain cases too much audio reactivity can be a nuisance. It needs to be carefully balanced. However, usually in these cases you can simply add a toggle to the control panel that turns the audio reactivity on and off. Then you've got the best of both worlds and users can decide whether the audio animation fit the mood of the music or not.
 
 ### Controls
 
-Perhaps even more important than Audio Reactivity are the controls. Synesthesia is meant to be a Visual Instrument, something you can play and improvise with alongside live music. It can be surprisingly difficult to create a good control panel. Suddenly you've got to consider all kinds of User Experience issues that you wouldn't if you're just creating something on Shadertoy. Here are some of the classic problems I run into, and some solutions:
+Perhaps even more important than Audio Reactivity are the controls. Synesthesia is meant to be a Visual Instrument, something you can play and improvise with alongside live music. It can be surprisingly difficult to create a good control panel. Suddenly you've got to consider all kinds of User Experience issues that you wouldn't if you're just creating something on Shadertoy. Here are some of the classic problems and some solutions:
 
 **Think about Organization**
 
@@ -55,23 +55,22 @@ Perhaps even more important than Audio Reactivity are the controls. Synesthesia 
 
 - Try to avoid controls that don't do anything if another control is in a certain state. This leads to a bad experience when a user moves a slider and doesn't see any visual change at all.
 - If two controls have a really complex interaction with each other, consider putting them into their own group and mention the interaction in each control's description.
-- Sometimes the scene will look great over most parameter spaces, but when two controls both get pushed towards the tops of their ranges the scene starts to break. You can fix this by limiting the range of one control based on the value the other, for instance float controlModded = mix(control, control*0.8, control2); Complex interactions like this may seem confusing for users at first, but it's always nice to keep the scene from "breaking" in the context of a high-stakes live performance.
+- Sometimes the scene will look great over most parameter spaces, but when two controls both get pushed towards the tops of their ranges the scene starts to break. You can fix this by limiting the range of one control based on the value the other, for instance `float controlModded = mix(control, control*0.8, control2);` Complex interactions like this may seem confusing for users at first, but it's always nice to keep the scene from "breaking" in the context of a high-stakes live performance.
 
 **Control Ranges + Curves**
 
 - Setting the MIN/MAX for a control is one of the most important things in each scene.
 - Sometimes a slider is great between 0.0 and 1.0, but when set to exactly 0.0 the scene breaks, so in that case set MIN to 0.001.
-- Maybe a certain slider goes from 1 to 100, and looks great at both 100 and in the lower part of the slider, between 1 and 10. However, the middle area between 10 and 90 is all pretty boring. This calls for a curve! Just change the Max from 100 to 10 and then in the GLSL do myControlMod = pow(myControl, 2); Now you've got the same range but a user controlling the slider on a MIDI device will have more room to move around in the "interesting zones" of a certain control.
+- Maybe a certain slider goes from 1 to 100, and looks great at both 100 and in the lower part of the slider, between 1 and 10. However, the middle area between 10 and 90 is all pretty boring. This calls for a curve! Just change the Max from 100 to 10 and then in the GLSL do `myControlMod = pow(myControl, 2);`. Now you've got the same range but a user controlling the slider on a MIDI device will have more room to move around in the "interesting zones" of a certain control.
 
 **Control Variants**
 
-- Almost all controls have a "smooth" variant that I find incredibly useful. When in doubt, try to make your control types "slider smooth" or "xy smooth", which allows for buttery smooth animation. When working with smooth-type controls, it's very important to set the "PARAMS" value to get the right speed of animation for whatever element you've got. I like to start with "PARAMS": 0.05 and go up to 0.2 if I want it faster, or down to 0.005 if I want it slower.
-- "bang smooth" is an excellent control type! I always like to add a few "bang" type actions to a scene because this gives a user an easy place to start when VJing a scene live, and the smooth allows an animation to occupy more than a single frame, pretty important in all but the glitchiest music.
+- Almost all controls have a "smooth" variant that can be incredibly useful. When in doubt, try to make your control types "slider smooth" or "xy smooth", which allows for buttery smooth animation. When working with smooth-type controls, it's very important to set the "PARAMS" value to get the right speed of animation for whatever element you've got. A good approach is to start with `"PARAMS": 0.05` and go up to 0.2 if you want it faster, or down to 0.005 if you want it slower.
+- "bang smooth" is an excellent control type! It's always good to add a few "bang" type actions to a scene because this gives a user an easy place to start when VJing a scene live, and the smooth allows an animation to occupy more than a single frame -- pretty important in all but the glitchiest music.
 
 **Starting Defaults**
 
-- At the very end, before submitting the scene to us, think about how the scene starts when a user clicks on it for the first time. The "DEFAULT" values should all be carefully set. Ideally you want the scene to pull someone in right off the bat, but still leave plenty of room to build and grow over the course of a song.
-- A good looking opening will also entice more users to buy the scene.
+- At the very end, think about how the scene starts when a user clicks on it for the first time. The "DEFAULT" values should all be carefully set. Ideally you want the scene to pull someone in right off the bat, but still leave plenty of room to build and grow over the course of a song.
 
 ### Miscellaneous Tips
 
