@@ -16,7 +16,7 @@
 
 [Sass](https://sass-lang.com/) — used to style the docs
 
-- Install with `npm install -g sass` or `choco install sass`
+- Will be installed with `npm install`. Can also install with `npm install -g sass` or `choco install sass`
 
 ## Building
 
