@@ -129,6 +129,128 @@ _pixelate(0.456, 5);         // returns 0.4
 _pixelate({0.3, 0.314}, 10); // returns {.3, .3}
 ```
 
+### `_mix3()`
+
+mixs between 3 values using a normalized mix value
+
+```glsl
+float mixedValue = _mix3(float val1, float val2, float val3, float mixVal);
+vec2 mixedValue = _mix3(vec2 val1, vec2 val2, vec2 val3, float mixVal);
+vec3 mixedValue = _mix3(vec3 val1, vec3 val2, vec3 val3, float mixVal);
+vec4 mixedValue = _mix3(vec4 val1, vec4 val2, vec4 val3, float mixVal);
+```
+
+**Params**
+
+- val1 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 1st value to mix
+- val2 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 2nd value to mix
+- val3 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 3rd value to mix
+- mixVal <code>float</code> - the mix value within the range `0.0` to `1.0`
+
+**Returns**: <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the mixed value
+
+### `_mix4()`
+
+mixs between 4 values using a normalized mix value
+
+```glsl
+float mixedValue = _mix4(float val1, float val2, float val3, float val4, float mixVal);
+vec2 mixedValue = _mix4(vec2 val1, vec2 val2, vec2 val3, vec2 val4, float mixVal);
+vec3 mixedValue = _mix4(vec3 val1, vec3 val2, vec3 val3, vec3 val4, float mixVal);
+vec4 mixedValue = _mix4(vec4 val1, vec4 val2, vec4 val3, vec4 val4, float mixVal);
+```
+
+**Params**
+
+- val1 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 1st value to mix
+- val2 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 2nd value to mix
+- val3 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 3rd value to mix
+- val4 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 4th value to mix
+- mixVal <code>float</code> - the mix value within the range `0.0` to `1.0`
+
+**Returns**: <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the mixed value
+
+### `_mix5()`
+
+mixs between 5 values using a normalized mix value
+
+```glsl
+float mixedValue = _mix5(float val1, float val2, float val3, float val4, float val5, float mixVal);
+vec2 mixedValue = _mix5(vec2 val1, vec2 val2, vec2 val3, vec2 val4, vec2 val5, float mixVal);
+vec3 mixedValue = _mix5(vec3 val1, vec3 val2, vec3 val3, vec3 val4, vec3 val5, float mixVal);
+vec4 mixedValue = _mix5(vec4 val1, vec4 val2, vec4 val3, vec4 val4, vec4 val5, float mixVal);
+```
+
+**Params**
+
+- val1 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 1st value to mix
+- val2 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 2nd value to mix
+- val3 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 3rd value to mix
+- val4 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 4th value to mix
+- val5 <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the 5th value to mix
+- mixVal <code>float</code> - the mix value within the range `0.0` to `1.0`
+
+**Returns**: <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the mixed value
+
+### `_nsin()`
+
+Generates a sine wave with values normalized between 0 and 1
+```glsl
+float wave = _nsin(float valIn);
+```
+
+**Params**
+
+- valIn <code>float</code> - the value inside of the `sin()` function
+
+**Returns**: <code>float</code> - the value of the wave at the given position, ranging from `0` to `1` 
+### `_ncos()`
+
+Generates a cosine wave with values normalized between 0 and 1
+```glsl
+float wave = _ncos(float valIn);
+```
+
+**Params**
+
+- valIn <code>float</code> - the value inside of the `sin()` function
+
+**Returns**: <code>float</code> - the value of the wave at the given position, ranging from `0` to `1` 
+### `_nclamp()`
+
+clamps a given value between 0 and 1. useful to use with a `mix` function where a value over `1` can cause issues on certain GPUs.
+```glsl
+float clampedVal = _nclamp(float var);
+vec2 clampedVal = _nclamp(vec2 var);
+vec3 clampedVal = _nclamp(vec3 var);
+vec4 clampedVal = _nclamp(vec4 var);
+```
+
+**Params**
+
+- valIn <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the value inside of the `clamp()` function
+
+**Returns**: <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the clamped value
+### `_mapValue()`
+
+Map a value inside of a given range to a new range, effectively scaling the value linearly.
+```glsl
+float scaledValue = _mapValue(float value, float min, float max, float new_min, float new_max);
+vec2 scaledValue = _mapValue(vec2 value, vec2 min, vec2 max, vec2 new_min, vec2 new_max);
+vec3 scaledValue = _mapValue(vec3 value, vec3 min, vec3 max, vec3 new_min, vec3 new_max);
+vec4 scaledValue = _mapValue(vec4 value, vec4 min, vec4 max, vec4 new_min, vec4 new_max);
+```
+
+**Params**
+
+- value <code>float</code> - a value inside of the min and max range
+- min <code>float</code> - the current min value
+- max <code>float</code> - the current max value
+- new_min <code>float</code> - the new min value
+- new_max <code>float</code> - the new max value
+
+**Returns**: <code>float</code> - the current value mapped to the new range
+
 ## Noise
 
 ### `_noise()`
@@ -174,7 +296,41 @@ float chaotic = _statelessContinuousChaotic(float time);
 
 - time <code>float</code> - a steadily increasing value (like the `TIME` uniform)
 
-**Returns**: <code>float</code> - a continuously changing, noiselike value  
+**Returns**: <code>float</code> - a continuously changing, noiselike value
+
+### `_hash{out}{in}()`
+
+Takes the specified input shape and produces a hash for the specified output shape. 
+
+```glsl
+//1 dimensional hash
+float hash = _hash11(float p);
+float hash = _hash12(vec2 p);
+float hash = _hash13(vec3 p);
+
+//2 dimensional hash
+vec2 hash = _hash21(float p);
+vec2 hash = _hash22(vec2 p);
+vec2 hash = _hash23(vec3 p);
+
+//3 dimensional hash
+vec3 hash = _hash31(float p);
+vec3 hash = _hash32(vec2 p);
+vec3 hash = _hash33(vec3 p);
+
+//4 dimensional hash
+vec4 hash = _hash41(float p);
+vec4 hash = _hash42(vec2 p);
+vec4 hash = _hash43(vec3 p);
+vec4 hash = _hash44(vec4 p);
+
+```
+
+**Params**
+
+- p <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the seed used to generate the hash value.
+
+**Returns**: <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - a hash value in the range `0` to `1`  
 
 ## Coordinates
 
@@ -294,12 +450,14 @@ vec3 rgb = _hsv2rgb(vec3 hsv);
 
 Converts an RGB color vector in the range `0` to `255` to a vector in the range `0.0` to `1.0`
 ```glsl
-vec3 normalizedRGB = _normalizeRGB(vec3 rgb);
+vec3 normalizedRGB = _normalizeRGB(float r, float g, float b);
 ```
 
 **Params**
 
-- RGB <code>vec3</code> - a color vector in the range `0` to `255`
+- r <code>float</code> - a float in the range `0` to `255`
+- g <code>float</code> - a float in the range `0` to `255`
+- b <code>float</code> - a float in the range `0` to `255`
 
 **Returns**: <code>vec3</code> - a vector with components in the range `0.0` to `1.0`  
 
@@ -321,6 +479,36 @@ vec3 paletteColor = _palette(float index, vec3 biases, vec3 amps, vec3 freqs, ve
 - phases <code>vec3</code> - the RGB phase offsets in the form `(redPhase, greenPhase, bluePhase)`
 
 **Returns**: <code>vec3</code> - a color within the generated palette  
+
+### `_grayScale()`
+
+Converts an RGB or RGBA color vector into a grayscale vector based on the sRGB color space.
+```glsl
+vec3 grayscaleRGB = _grayScale(vec3 rgb);
+vec4 grayscaleRGBA = _grayScale(vec4 rgba);
+```
+
+**Params**
+
+- RGB <code>vec3</code> | <code>vec4</code> - a normalized color vector
+- intensity <code>float</code> - a normalized value that determines how much to grayscale the given vector. a value of 1 will give full grayscale.
+
+**Returns**: <code>vec3</code> | <code>vec4</code>- a grayscale vector in the form `(red, green, blue)`
+### `_diChrome()`
+
+Converts an RGB or RGBA color vector into a two tone color.
+```glsl
+vec3 diChromeRGB = _diChrome(vec3 rgb, vec3 color1, vec3 color2);
+vec4 diChromeRGBA = _diChrome(vec4 rgba, vec3 color1, vec3 color2);
+```
+
+**Params**
+
+- RGB <code>vec3</code> | <code>vec4</code> - a normalized color vector
+- color1 <code>vec3</code> - the first rgb color vector to re-color to
+- color2 <code>vec3</code> - the second rgb color vector to re-color to
+
+**Returns**: <code>vec3</code> | <code>vec4</code> - a color vector in the form `(red, green, blue)`
 
 ## Media
 
@@ -430,3 +618,133 @@ if (_exists(syn_UserImage)) {
   color *= _loadUserImageAsMask().r;
 }
 ```
+
+### `_edgeDetectUserImage()`
+
+Detects edges of the selected user media inexpensively through a bilinear method.
+
+```glsl
+vec4 mediaEdges = _edgeDetectUserImage();
+```
+
+**Returns**: <code>vec4</code> - the color of the edges for the selected user media. This value is likely to be small
+
+### `_edgeDetectSobelUserImage()`
+
+Detects edges of the currently selected user media using the sobel method. More info oon the sobel operator [can be found here.](https://en.wikipedia.org/wiki/Sobel_operator).
+
+```glsl
+vec4 mediaEdges = _edgeDetectSobelUserImage();
+```
+
+
+**Returns**: <code>float</code> - a grayscale value corresponding to the edges of the currently selected media
+
+## Multipass
+
+### `_edgeDetectSynPass()`
+
+Detects edges of a given texture or syn pass inexpensively through a bilinear method.
+
+```glsl
+vec4 passEdges = _edgeDetectSynPass(sampler2D texture);
+```
+
+**Params**
+
+- texture <code>sampler2D</code> - the texture or syn pass to calculate the edges for
+
+**Returns**: <code>vec4</code> - the color of the edges for the given texture. This value is likely to be small
+cd C()`
+
+Detects edges of a given texture or syn pass using the sobel method. More info oon the sobel operator [can be found here.](https://en.wikipedia.org/wiki/Sobel_operator).
+
+```glsl
+vec4 passEdges = _edgeDetectSobelSynPass(sampler2D texture);
+```
+
+**Params**
+
+- texture <code>sampler2D</code> - the texture or syn pass to calculate the edges for
+
+**Returns**: <code>float</code> - a grayscale value corresponding to the edges of the given texture
+
+### `_grayScaleSynPass()`
+
+Grayscales a given texture or syn pass
+
+```glsl
+vec4 userImage = _grayScaleSynPass(sampler2D texture, float intensity);
+```
+
+**Params**
+
+- texture <code>sampler2D</code> - the texture or syn pass to grayscale
+- intensity <code>float</code> - a normalized value that determines how much to grayscale the given texture. a value of 1 will give full grayscale.
+
+**Returns**: <code>vec4</code> - the grayscale value of the given texture
+### `_diChromeSynPass()`
+
+Converts an RGB or RGBA color vector into a two tone color.
+```glsl
+vec3 diChromeRGB = _diChrome(vec3 rgb, vec3 color1, vec3 color2);
+vec4 diChromeRGBA = _diChrome(vec4 rgba, vec3 color1, vec3 color2);
+```
+
+**Params**
+
+- smp <code>sampler2D</code> - the texture or syn pass to re-color
+- color1 <code>vec3</code> - the first rgb color vector to re-color to
+- color2 <code>vec3</code> - the second rgb color vector to re-color to
+
+**Returns**: <code>vec4</code> - the dichromed value of the given texture
+### `_hBlurTiltShiftSynPass()`
+
+Applies a tilt shift in the horizontal direction. Use in tandem with `_vBlurTiltShiftSynPass()` in a second pass to create a tilt shift effect. Note that this effect can be very expensive!
+
+```glsl
+vec4 renderMain(void)
+{
+    if(PASSINDEX == 0) {
+      return _loadUserImage();
+    } else if (PASSINDEX == 1){
+      return _hBlurTiltShiftSynPass(sampler2D texIn, float blurAmt, float blurLoc);
+    } else if (PASSINDEX == 2) {
+      return _vBlurTiltShiftSynPass(sampler2D texIn, float blurAmt, float blurLoc);
+    } 
+}
+
+```
+
+**Params**
+
+- texIn <code>sampler2D</code> - the texture or syn pass to apply the effect to
+- blurAmt <code>float</code> - the blur level. This will add iterations to the blur loop, so lower will be faster
+- blurLoc <code>float</code> - the location of the blur
+
+**Returns**: <code>vec4</code> - the blurred texture
+### `_vBlurTiltShiftSynPass()`
+
+Applies a tilt shift in the vertical direction. Use in tandem with `_vBlurTiltShiftSynPass()` in a second pass to create a tilt shift effect. Note that this effect can be very expensive!
+
+```glsl
+vec4 renderMain(void)
+{
+    if(PASSINDEX == 0) {
+      return _loadUserImage();
+    } else if (PASSINDEX == 1){
+      return syn_pass_horBlurTiltShift(sampler2D texIn, float blurAmt, float blurLoc);
+    } else if (PASSINDEX == 2) {
+      return syn_pass_vertBlurTiltShift(sampler2D texIn, float blurAmt, float blurLoc);
+    } 
+}
+
+```
+
+**Params**
+
+- texIn <code>sampler2D</code> - the texture or syn pass to apply the effect to
+- blurAmt <code>float</code> - the blur level. This will add iterations to the blur loop, so lower will be faster
+- blurLoc <code>float</code> - the location of the blur
+
+**Returns**: <code>vec4</code> - the blurred texture
