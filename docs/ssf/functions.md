@@ -493,7 +493,7 @@ vec4 grayscaleRGBA = _grayScale(vec4 rgba);
 - RGB <code>vec3</code> | <code>vec4</code> - a normalized color vector
 - intensity <code>float</code> - a normalized value that determines how much to grayscale the given vector. a value of 1 will give full grayscale.
 
-**Returns**: <code>vec3</code> | <code>vec4</code>- a grayscale vector in the form `(red, green, blue)`
+**Returns**: <code>vec3</code> | <code>vec4</code>- a grayscale vector in the form `(red, green, blue, (alpha))`
 ### `_diChrome()`
 
 Converts an RGB or RGBA color vector into a two tone color.
@@ -508,7 +508,22 @@ vec4 diChromeRGBA = _diChrome(vec4 rgba, vec3 color1, vec3 color2);
 - color1 <code>vec3</code> - the first rgb color vector to re-color to
 - color2 <code>vec3</code> - the second rgb color vector to re-color to
 
-**Returns**: <code>vec3</code> | <code>vec4</code> - a color vector in the form `(red, green, blue)`
+**Returns**: <code>vec3</code> | <code>vec4</code> - a color vector in the form `(red, green, blue, (alpha))`
+
+### `_hueRotate()`
+
+Rotates a given color around the hue wheel
+```glsl
+vec3 newColor = _hueRotate(vec3 rgb, float rot);
+```
+
+**Params**
+
+- RGB <code>vec3</code> | <code>vec4</code> - a normalized color vector
+- rot <code>float</code> - The rotation value in degrees
+
+**Returns**: <code>vec3</code> - a color vector in the form `(red, green, blue)`
+
 
 ## Media
 
