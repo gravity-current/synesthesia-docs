@@ -131,7 +131,7 @@ _pixelate({0.3, 0.314}, 10); // returns {.3, .3}
 
 ### `_mix3()`
 
-mixs between 3 values using a normalized mix value
+Mixes between 3 values using a normalized mix value
 
 ```glsl
 float mixedValue = _mix3(float val1, float val2, float val3, float mixVal);
@@ -151,7 +151,7 @@ vec4 mixedValue = _mix3(vec4 val1, vec4 val2, vec4 val3, float mixVal);
 
 ### `_mix4()`
 
-mixs between 4 values using a normalized mix value
+Mixes between 4 values using a normalized mix value
 
 ```glsl
 float mixedValue = _mix4(float val1, float val2, float val3, float val4, float mixVal);
@@ -172,7 +172,7 @@ vec4 mixedValue = _mix4(vec4 val1, vec4 val2, vec4 val3, vec4 val4, float mixVal
 
 ### `_mix5()`
 
-mixs between 5 values using a normalized mix value
+Mixes between 5 values using a normalized mix value
 
 ```glsl
 float mixedValue = _mix5(float val1, float val2, float val3, float val4, float val5, float mixVal);
@@ -233,7 +233,7 @@ vec4 clampedVal = _nclamp(vec4 var);
 **Returns**: <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the clamped value
 ### `_mapValue()`
 
-Map a value inside of a given range to a new range, effectively scaling the value linearly.
+Map a value inside of a given range to a new range, scaling the value linearly.
 ```glsl
 float scaledValue = _mapValue(float value, float min, float max, float new_min, float new_max);
 vec2 scaledValue = _mapValue(vec2 value, vec2 min, vec2 max, vec2 new_min, vec2 new_max);
@@ -484,8 +484,8 @@ vec3 paletteColor = _palette(float index, vec3 biases, vec3 amps, vec3 freqs, ve
 
 Converts an RGB or RGBA color vector into a grayscale vector based on the sRGB color space.
 ```glsl
-vec3 grayscaleRGB = _grayScale(vec3 rgb);
-vec4 grayscaleRGBA = _grayScale(vec4 rgba);
+vec3 grayscaleRGB = _grayScale(vec3 rgb, float intensity);
+vec4 grayscaleRGBA = _grayScale(vec4 rgba, float intensity);
 ```
 
 **Params**

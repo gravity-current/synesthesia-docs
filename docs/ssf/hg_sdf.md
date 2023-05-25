@@ -1,6 +1,6 @@
 # hg_sdf Functions
 
-In addition to the built in SSF functions, we have included the open-source [hg_sdf library by mercury](https://mercury.sexy/hg_sdf/) for your convienence. This library provides a very large toolset for creating raymarched scenes. to avoid namespace collision, we have prefixed all available functions with a `_`. The following documentation is provided from the Mercury team. For more information, check out their website.
+In addition to the built in SSF functions, we have included the open-source [hg_sdf library by mercury](https://mercury.sexy/hg_sdf/) for your convienence. This library provides a very large toolset for creating raymarched scenes. To avoid namespace collision, we have prefixed all available functions with `_`. The following documentation is provided from the Mercury team. For more information, check out [their website](https://mercury.sexy/hg_sdf/).
 
 ## Helper Functions and Macros
 
