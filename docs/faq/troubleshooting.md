@@ -5,7 +5,7 @@ The main two reasons that a scene would appear black are missing audio or missin
 
 Synesthesia is built to be run with a live audio stream. Without it, some scenes won't do anything at all. See ["how do I set up my audio input?"](./audio.md#how-do-i-set-up-my-audio-input) for more info.
 
-Certain scenes are built entirely around media, and use it to supply color or action to the scene. Without any media selected, these scenes may appear black. See ["how can I mix my own images or videos into a scene?"](./general.md#how-can-i-mix-my-own-images-or-videos-into-a-scene) for information on adding media to scenes.
+Certain scenes are built entirely around media, and use it to supply color or action to the scene. Without any media selected, these scenes may appear black. See ["how can I mix my own images or videos into a scene?"](./index.md#how-can-i-mix-my-own-images-or-videos-into-a-scene) for information on adding media to scenes.
 
 If you know the issue is not audio or media related, go to the edit panel on the right and scroll to the bottom of the console output. If there are any errors rendering scenes, you should see them appear in red there.
 

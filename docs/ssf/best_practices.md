@@ -32,7 +32,7 @@ col = mix(col, col*vec3(0.5,0.5,2.0), syn_BPMSin4);
 uv += _rotate(vec2(0.0, 1.0), 2*PI*texture(syn_Spectrum, _uv.y).g)*0.01;
 ```
 
-You can use the [Audio Reactive Uniforms](ssf/audio_uniforms.md) page for reference to see all our audio uniforms.
+You can use the [Audio Reactive Uniforms](./audio_uniforms.md) page for reference to see all our audio uniforms.
 
 Basic color flashing is always an easy place to start, but it's usually good to try to look for deeper or novel ways to add audio reactivity to a Scene. Some questions that can help you:
 
