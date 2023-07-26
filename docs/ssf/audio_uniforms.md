@@ -2,7 +2,24 @@
 
 Synesthesia analyzes whatever music is playing in real-time, providing a large set of audio reactive uniforms. These uniforms are automatically updated every frame, making it easy to create reactive visuals without performing any of your own audio analysis.
 
-Many of the uniforms rely on [FFT analysis](https://www.dataq.com/data-acquisition/general-education-tutorials/fft-fast-fourier-transform-waveform-analysis.html), splitting the audio spectrum into 4 main bands: Bass, Mid, MidHigh, and High. 
+Many of the uniforms rely on [FFT analysis](https://www.dataq.com/data-acquisition/general-education-tutorials/fft-fast-fourier-transform-waveform-analysis.html), splitting the audio spectrum into 4 main bands: Bass, Mid, MidHigh, and High.
+
+### Data Textures
+
+There are two textures which store different audio data in each channel. Here is a visualization of these 2DSamplers from the built-in Audio Indicators scene:
+
+[![Audio Samplers](../src/images/audio_samplers.gif)](../src/images/audio_samplers.gif)
+
+- `syn_Spectrum` stores FFT and audio waveform data. This is useful for creating audio reactive shapes and direct music visualizers.
+	- `r channel` - **Raw FFT**. Unprocessed audio frequency data *(first in visualization from bottom to top)*
+	- `g channel` - **Juiced FFT**. This data is processed to look much better than the Raw FFT -- this should be your default when working with FFT sampling. It incorporates bin smoothing, temporal smoothing, logarithmic frequency scaling, and high-end boosting to make the FFT look consistent and smooth across all frequencies *(second in visualization)*
+	- `b channel` - **Smooth FFT**. This channel represents the FFT with much less frequency resolution, creating a smoother shape. It incoporates the same smoothing and scaling as the Juiced FFT *(third in visualization)*
+	- `a channel` - **Waveform**. The raw audio waveform data, which changes every frame. *(fourth in visualization)*
+- `syn_LevelTrail` stores the level of frequency bands over time. This is useful for creating trails that react to music *(top in visualization)*
+	- `r channel` - **Whole Spectrum Level**
+	- `g channel` - **Bass Level**
+	- `b channel` - **Mid Level**
+	- `a channel` - **High Level**
 
 ### Level
 These uniforms track the level (loudness) of specific frequency bands, with some added smoothing to reduce jitter. They are normalized to the range `0.0` to `1.0`.
