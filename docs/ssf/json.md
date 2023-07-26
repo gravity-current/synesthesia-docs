@@ -105,6 +105,14 @@ Type | Description
 `"PARAMS"` | For smooth controls, determines the speed of transitions between values. The smaller the value, the *longer* it will take. It takes roughly `1/PARAMS` frames to transition (`1.0` takes 1 frame, `.1` takes ten frames, etc.). The default value of `"PARAMS"` is `0.01`. 
 `"LABELS"` and `"VALUES"` | These keys define the options for a dropdown control. `"LABELS"` is an array of strings that appear as the options in the dropdown menu, like `"LABELS": ["cold", "warm", "hot"]`. `"VALUES"` is an array of numbers that get passed into the shader for each option, like `"VALUES": [0.0, 0.5, 1.0]`. These arrays are linked: if the user selects the second *label* in the menu, the second *value* will be outputted to the shader (`"warm"` -> `0.5`). You only need one of these keys to define a dropdown control. If you only define the `"LABELS"` key, the values will automatically be set to the index value (0, 1, 2, etc.). If you only define the `"VALUES"` key, the labels will automatically be set to "option 1", "option 2", "option 3", etc.
 
+## Media
+The optional `MEDIA` key allows you to modify the texture lookup `WRAP` and `FILTER` methods used when accessing the user media with `syn_Media` or the various media loading functions provided by Synesthesia.
+
+Key | Description
+------------ | -------------
+`"WRAP"` | The texture wrapping method. This determines how the texture is sampled when the UV coordinates are outside the range of 0.0 to 1.0. The default value is `"repeat"` which repeats the image in a grid, equivalent to `fract(uv)`. The other options are `"clamp"`, which will sample an edge pixel if the uv is out of the 0.0 to 1.0 range, and `"mirror"` which reflects out of range uvs.
+`"FILTER"` | The texture filtering method. This determines how the texture is sampled when the UV coordinates are between pixels. The default value is `"linear"`, which uses bilinear interpolation to smooth the texture. The other options are `"nearest"`, which uses nearest neighbor interpolation to preserve the pixelated look of the texture, and `"mipmap"`, which uses mipmapping to provide level of detail lookups - great for minimizing aliasing when scaling down textures or creating effects that involve blurring.
+
 ## Passes
 SSF allows you to easily create shaders with multiple passes. Multipass rendering is useful for creating "feedback," where the results of previous frames are used in the current frame to create iterative, compounding effects (like fractals, fluid simulation, reaction diffusion, etc.). It's also a useful way to structure shader code by separating distinct code into different passes (e.g. rendering an image in pass 1, then blurring the result in pass 2). The majority of built-in Synesthesia scenes involve multi-pass effects — `Churning`, `Fluid Body`, and `Biopsy` are good examples.
 
