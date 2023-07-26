@@ -6,6 +6,12 @@ The Synesthesia team would love your help in developing these docs!
 
 ## Dependencies
 
+#### Quick Install
+
+`pip install -r requirements.txt && npm i`
+
+#### Manual Install
+
 [MKDocs](https://www.mkdocs.org/) — the library used to create the docs
 
 - Install with `pip install mkdocs` or `choco install mkdocs`

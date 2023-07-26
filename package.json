@@ -9,8 +9,8 @@
   "scripts": {
     "serve": "mkdocs serve --dev-addr 127.0.0.1:9999",
     "style": "sass --watch docs/stylesheets/sass_input.scss docs/stylesheets/sass_output.css",
-    "build": "./build-docs.sh",
-    "start": "(trap 'kill 0' INT TERM; npm run style & npm run serve)"
+    "build": "build-docs.sh",
+    "start": "npm-run-all --parallel style serve"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,8 @@
   "dependencies": {
     "express": "^4.17.3",
     "sass": "^1.53.0"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }
