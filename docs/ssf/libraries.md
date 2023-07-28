@@ -1,15 +1,76 @@
-# hg_sdf Functions
+# External Libraries
 
-In addition to the built in SSF functions, we have included the open-source [hg_sdf library by mercury](https://mercury.sexy/hg_sdf/) for your convienence. This library provides a very large toolset for creating raymarched scenes. To avoid namespace collision, we have prefixed all available functions with `_`. The following documentation is provided from the Mercury team. For more information, check out [their website](https://mercury.sexy/hg_sdf/).
+## Overview
 
-## Helper Functions and Macros
+In addition to the built in SSF library, Synesthesia includes some external libraries to help create your scenes. These libraries are not compiled by default -- you need to include the files in your `main.glsl` file to use them. 
 
-### `_sgn()`
+So far, there are two external libraries available in Synesthesia: [lygia](#lygia) and [hg_sdf](#hg_sdf).
+
+## Custom Library
+
+You can create your own GLSL library by adding a folder called `glsl` in your user data folder. Any `.glsl` files in this folder can be included in your shader. Here is the location of your user data folder:
+
+- Windows: `C:\Users\{username}\AppData\Local\Synesthesia\Data`
+- Mac: `~/Library/Application Support/com.gravitycurrent.synesthesia/Data`
+
+For example, if you create the file `glsl/lib.glsl` within this Data folder, you could add `#include "lib.glsl"` at the top of your shader and use any functions from the file.
+
+**NOTE:** if you plan to share a scene that uses custom library code, you'll need to copy paste the library code into your shader, since other users won't have these library files.
+
+## lygia
+
+[Lygia](https://github.com/patriciogonzalezvivo/lygia) is an open-source library by Patricio Gonzalez Vivo, creator of many incredible shader resources including [The Book of Shaders](https://thebookofshaders.com/). 
+
+The library includes a wide array of functions that touch nearly every aspect of shader programming. It is very granular -- each function has its own file. There are also some files that group multiple functions. For example:
+
+```js
+// include a single function
+#include "lygia/math/rotate3d.glsl"
+#include "lygia/space/displace.glsl"
+#include "lygia/color/tonemap.glsl"
+
+#include "lygia/math.glsl" 					// all math functions
+#include "lygia/sdf.glsl"  					// all sdf functions
+#include "lygia/color/blend.glsl"		// all blend functions
+```
+
+To learn more about the library and all its functions/files, check out the [github](https://github.com/patriciogonzalezvivo/lygia) or [website](https://lygia.xyz/). Here are links to documentation for each section of the library (copied from the website):
+
+<ul>
+	<li><a href="https://lygia.xyz/math"><code>math/</code></a>: general math functions and constants: <code>PI</code>, <code>SqrtLength()</code>, etc. </li>
+	<li><a href="https://lygia.xyz/space"><code>space/</code></a>: general spatial operations: <code>scale()</code>, <code>rotate()</code>, etc. </li>
+	<li><a href="https://lygia.xyz/color"><code>color/</code></a>: general color operations: <code>luma()</code>, <code>saturation()</code>, blend modes, palettes, color space conversion, and tonemaps.</li>
+	<li><a href="https://lygia.xyz/animation"><code>animation/</code></a>: animation operations: easing</li>
+	<li><a href="https://lygia.xyz/generative"><code>generative/</code></a>: generative functions: <code>random()</code>, <code>noise()</code>, etc. </li>
+	<li><a href="https://lygia.xyz/sdf"><code>sdf/</code></a>: signed distance field functions.</li>
+	<li><a href="https://lygia.xyz/draw"><code>draw/</code></a>: drawing functions like <code>digits()</code>, <code>stroke()</code>, <code>fill</code>, etc/.</li>
+	<li><a href="https://lygia.xyz/sample"><code>sample/</code></a>: sample operations</li>
+	<li><a href="https://lygia.xyz/filter"><code>filter/</code></a>: typical filter operations: different kind of blurs, mean and median filters.</li>
+	<li><a href="https://lygia.xyz/distort"><code>distort/</code></a>: distort sampling operations</li>
+	<li><a href="https://lygia.xyz/simulate"><code>simulate/</code></a>: simulate sampling operations</li>
+	<li><a href="https://lygia.xyz/lighting"><code>lighting/</code></a>: different lighting models and functions for foward/deferred/raymarching rendering</li>
+	<li><a href="https://lygia.xyz/geometry"><code>geometry/</code></a>: operation related to geometries: intersections and AABB accelerating structures.</li>
+	<li><a href="https://lygia.xyz/morphological"><code>morphological/</code></a>: morphological filters: dilation, erosion, alpha and poisson fill.</li>
+</ul>
+
+## hg_sdf
+
+[hg_sdf](https://mercury.sexy/hg_sdf/) is an open-source library that provides a powerful toolset for creating raymarched scenes with signed distance functions (sdf). The following documentation is provided by the Mercury team. For more information, check out [their website](https://mercury.sexy/hg_sdf/).
+
+**NOTE**: to use hg_sdf, add this include line to the top of your `main.glsl` file:
+
+```glsl
+#include "hg_sdf.glsl"
+```
+
+### Helper Functions and Macros
+
+#### `sgn()`
 
 Sign function that doesn't return 0
 ```glsl
-float signedValue = _sgn(float x);
-vec2 signedValue = _sgn(vec2 v);
+float signedValue = sgn(float x);
+vec2 signedValue = sgn(vec2 v);
 ```
 
 **Params**
@@ -18,14 +79,14 @@ vec2 signedValue = _sgn(vec2 v);
 
 **Returns**: <code>float</code> - `1` or `-1` 
 
-### `_square()`
+#### `square()`
 
 square the value
 ```glsl
-float squared = _square(float x);
-vec2 squared = _square(vec2 x);
-vec3 squared = _square(vec3 x);
-vec4 squared = _square(vec4 x);
+float squared = square(float x);
+vec2 squared = square(vec2 x);
+vec3 squared = square(vec3 x);
+vec4 squared = square(vec4 x);
 ```
 
 **Params**
@@ -34,11 +95,11 @@ vec4 squared = _square(vec4 x);
 
 **Returns**: <code>float</code> - squared value
 
-### `_lengthSqr()`
+#### `lengthSqr()`
 
 ```glsl
-float squared = _lengthSqr(vec2 x);
-float squared = _lengthSqr(vec3 x);
+float squared = lengthSqr(vec2 x);
+float squared = lengthSqr(vec3 x);
 ```
 
 **Params**
@@ -47,13 +108,13 @@ float squared = _lengthSqr(vec3 x);
 
 **Returns**: <code>float</code> - squared length value
 
-### `_vmax()`
+#### `vmax()`
 
 Maximum components of a vector
 ```glsl
-float vectorMax = _vmax(vec2 v);
-float vectorMax = _vmax(vec3 v);
-float vectorMax = _vmax(vec4 v);
+float vectorMax = vmax(vec2 v);
+float vectorMax = vmax(vec3 v);
+float vectorMax = vmax(vec4 v);
 ```
 
 **Params**
@@ -62,13 +123,13 @@ float vectorMax = _vmax(vec4 v);
 
 **Returns**: <code>float</code> - the largest component of the vector
 
-### `_vmin()`
+#### `vmin()`
 
 Minimum components of a vector
 ```glsl
-float vectorMin = _vmin(vec2 v);
-float vectorMin = _vmin(vec3 v);
-float vectorMin = _vmin(vec4 v);
+float vectorMin = vmin(vec2 v);
+float vectorMin = vmin(vec3 v);
+float vectorMin = vmin(vec4 v);
 ```
 
 **Params**
@@ -77,7 +138,7 @@ float vectorMin = _vmin(vec4 v);
 
 **Returns**: <code>float</code> - the smallest component of the vector
 
-## Primitive Objects
+### Primitive Objects
 
 Conventions:
 Everything that is a distance function is called fSomething.
@@ -86,10 +147,10 @@ Unless otherwise noted, (if the object has an intrinsic "up"
 side or direction) the y axis is "up" and the object is
 centered at the origin.
 
-### `_fSphere()`
+#### `fSphere()`
 
 ```glsl
-float sphere = _fSphere(vec3 p, float r);
+float sphere = fSphere(vec3 p, float r);
 ```
 
 **Params**
@@ -99,11 +160,11 @@ float sphere = _fSphere(vec3 p, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fPlane()`
+#### `fPlane()`
 
 Plane with normal n (n is normalized) at some distance from the origin
 ```glsl
-float plane = _fPlane(vec3 p, vec3 n, float distanceFromOrigin);
+float plane = fPlane(vec3 p, vec3 n, float distanceFromOrigin);
 ```
 
 **Params**
@@ -114,11 +175,11 @@ float plane = _fPlane(vec3 p, vec3 n, float distanceFromOrigin);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fBoxCheap()`
+#### `fBoxCheap()`
 
 Cheap Box: distance to corners is overestimated
 ```glsl
-float cheapBox = _fBoxCheap(vec3 p, vec3 b);
+float cheapBox = fBoxCheap(vec3 p, vec3 b);
 ```
 
 **Params**
@@ -128,11 +189,11 @@ float cheapBox = _fBoxCheap(vec3 p, vec3 b);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fBox()`
+#### `fBox()`
 
 Box: correct distance to corners
 ```glsl
-float box = _fBox(vec3 p, vec3 b);
+float box = fBox(vec3 p, vec3 b);
 ```
 
 **Params**
@@ -142,11 +203,11 @@ float box = _fBox(vec3 p, vec3 b);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fBox2Cheap()`
+#### `fBox2Cheap()`
 
 Same as above, but in two dimensions (an endless box)
 ```glsl
-float box = _fBox2Cheap(vec2 p, vec2 b);
+float box = fBox2Cheap(vec2 p, vec2 b);
 ```
 
 **Params**
@@ -156,10 +217,10 @@ float box = _fBox2Cheap(vec2 p, vec2 b);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fBox2()`
+#### `fBox2()`
 
 ```glsl
-float box = _fBox2(vec2 p, vec2 b);
+float box = fBox2(vec2 p, vec2 b);
 ```
 
 **Params**
@@ -169,11 +230,11 @@ float box = _fBox2(vec2 p, vec2 b);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fCorner()`
+#### `fCorner()`
 
 Endless "corner"
 ```glsl
-float corner = _fCorner(vec2 p);
+float corner = fCorner(vec2 p);
 ```
 
 **Params**
@@ -182,11 +243,11 @@ float corner = _fCorner(vec2 p);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fBlob()`
+#### `fBlob()`
 
 Blobby ball object. You've probably seen it somewhere. This is not a correct distance bound, beware.
 ```glsl
-float blob = _fBlob(vec3 p);
+float blob = fBlob(vec3 p);
 ```
 
 **Params**
@@ -195,11 +256,11 @@ float blob = _fBlob(vec3 p);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fCylinder()`
+#### `fCylinder()`
 
 Cylinder standing upright on the xz plane
 ```glsl
-float cylinder = _fCylinder(vec3 p, float r, float height);
+float cylinder = fCylinder(vec3 p, float r, float height);
 ```
 
 **Params**
@@ -210,11 +271,11 @@ float cylinder = _fCylinder(vec3 p, float r, float height);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fCapsule()`
+#### `fCapsule()`
 
 Capsule: A Cylinder with round caps on both sides
 ```glsl
-float capsule = _fCapsule(vec3 p, float r, float c);
+float capsule = fCapsule(vec3 p, float r, float c);
 ```
 
 **Params**
@@ -225,11 +286,11 @@ float capsule = _fCapsule(vec3 p, float r, float c);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fLineSegment()`
+#### `fLineSegment()`
 
 Distance to line segment between `a` and `b`, used for fCapsule() version 2 below
 ```glsl
-float dist = _fLineSegment(vec3 p, vec3 a, vec3 b);
+float dist = fLineSegment(vec3 p, vec3 a, vec3 b);
 ```
 
 **Params**
@@ -240,11 +301,11 @@ float dist = _fLineSegment(vec3 p, vec3 a, vec3 b);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fCapsule()`
+#### `fCapsule()`
 
 Capsule version 2: between two end points <a> and <b> with radius r
 ```glsl
-float capsule = _fCapsule(vec3 p, vec3 a, vec3 b, float r);
+float capsule = fCapsule(vec3 p, vec3 a, vec3 b, float r);
 ```
 
 **Params**
@@ -256,11 +317,11 @@ float capsule = _fCapsule(vec3 p, vec3 a, vec3 b, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fCapsule()`
+#### `fCapsule()`
 
 Capsule version 2: between two end points <a> and <b> with radius r
 ```glsl
-float capsule = _fCapsule(vec3 p, vec3 a, vec3 b, float r);
+float capsule = fCapsule(vec3 p, vec3 a, vec3 b, float r);
 ```
 
 **Params**
@@ -272,11 +333,11 @@ float capsule = _fCapsule(vec3 p, vec3 a, vec3 b, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fTorus()`
+#### `fTorus()`
 
 Torus in the XZ-plane
 ```glsl
-float donut = _fTorus(vec3 p, float smallRadius, float largeRadius);
+float donut = fTorus(vec3 p, float smallRadius, float largeRadius);
 ```
 
 **Params**
@@ -287,11 +348,11 @@ float donut = _fTorus(vec3 p, float smallRadius, float largeRadius);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fCircle()`
+#### `fCircle()`
 
 A circle line. Can also be used to make a torus by subtracting the smaller radius of the torus.
 ```glsl
-float circle = _fCircle(vec3 p, float r);
+float circle = fCircle(vec3 p, float r);
 ```
 
 **Params**
@@ -301,11 +362,11 @@ float circle = _fCircle(vec3 p, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fCircle()`
+#### `fCircle()`
 
 A circle line. Can also be used to make a torus by subtracting the smaller radius of the torus.
 ```glsl
-float circle = _fCircle(vec3 p, float r);
+float circle = fCircle(vec3 p, float r);
 ```
 
 **Params**
@@ -315,11 +376,11 @@ float circle = _fCircle(vec3 p, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fDisc()`
+#### `fDisc()`
 
 A circular disc with no thickness (i.e. a cylinder with no height). Subtract some value to make a flat disc with rounded edge.
 ```glsl
-float disc = _fDisc(vec3 p, float r);
+float disc = fDisc(vec3 p, float r);
 ```
 
 **Params**
@@ -329,11 +390,11 @@ float disc = _fDisc(vec3 p, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fHexagonCircumcircle()`
+#### `fHexagonCircumcircle()`
 
 Hexagonal prism, circumcircle variant
 ```glsl
-float prism = _fHexagonCircumcircle(vec3 p, vec2 h);
+float prism = fHexagonCircumcircle(vec3 p, vec2 h);
 ```
 
 **Params**
@@ -343,11 +404,11 @@ float prism = _fHexagonCircumcircle(vec3 p, vec2 h);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fHexagonIncircle()`
+#### `fHexagonIncircle()`
 
 Hexagonal prism, circumcircle variant
 ```glsl
-float prism = _fHexagonIncircle(vec3 p, vec2 h);
+float prism = fHexagonIncircle(vec3 p, vec2 h);
 ```
 
 **Params**
@@ -357,11 +418,11 @@ float prism = _fHexagonIncircle(vec3 p, vec2 h);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fCone()`
+#### `fCone()`
 
 Cone with correct distances to tip and base circle. Y is up, 0 is in the middle of the base.
 ```glsl
-float cone = _fCone(vec3 p, float radius, float height);
+float cone = fCone(vec3 p, float radius, float height);
 ```
 
 **Params**
@@ -372,10 +433,10 @@ float cone = _fCone(vec3 p, float radius, float height);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fOctahedron()`
+#### `fOctahedron()`
 
 ```glsl
-float polyhedron = _fOctahedron(vec3 p, float r, float e);
+float polyhedron = fOctahedron(vec3 p, float r, float e);
 ```
 
 **Params**
@@ -386,10 +447,10 @@ float polyhedron = _fOctahedron(vec3 p, float r, float e);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fDodecahedron()`
+#### `fDodecahedron()`
 
 ```glsl
-float polyhedron = _fDodecahedron(vec3 p, float r, float e);
+float polyhedron = fDodecahedron(vec3 p, float r, float e);
 ```
 
 **Params**
@@ -400,10 +461,10 @@ float polyhedron = _fDodecahedron(vec3 p, float r, float e);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fIcosahedron()`
+#### `fIcosahedron()`
 
 ```glsl
-float polyhedron = _fIcosahedron(vec3 p, float r, float e);
+float polyhedron = fIcosahedron(vec3 p, float r, float e);
 ```
 
 **Params**
@@ -414,10 +475,10 @@ float polyhedron = _fIcosahedron(vec3 p, float r, float e);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fTruncatedOctahedron()`
+#### `fTruncatedOctahedron()`
 
 ```glsl
-float polyhedron = _fTruncatedOctahedron(vec3 p, float r, float e);
+float polyhedron = fTruncatedOctahedron(vec3 p, float r, float e);
 ```
 
 **Params**
@@ -428,10 +489,10 @@ float polyhedron = _fTruncatedOctahedron(vec3 p, float r, float e);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fTruncatedIcosahedron()`
+#### `fTruncatedIcosahedron()`
 
 ```glsl
-float polyhedron = _fTruncatedIcosahedron(vec3 p, float r, float e);
+float polyhedron = fTruncatedIcosahedron(vec3 p, float r, float e);
 ```
 
 **Params**
@@ -442,10 +503,10 @@ float polyhedron = _fTruncatedIcosahedron(vec3 p, float r, float e);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fOctahedron()`
+#### `fOctahedron()`
 
 ```glsl
-float polyhedron = _fOctahedron(vec3 p, float r);
+float polyhedron = fOctahedron(vec3 p, float r);
 ```
 
 **Params**
@@ -455,10 +516,10 @@ float polyhedron = _fOctahedron(vec3 p, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fDodecahedron()`
+#### `fDodecahedron()`
 
 ```glsl
-float polyhedron = _fDodecahedron(vec3 p, float r);
+float polyhedron = fDodecahedron(vec3 p, float r);
 ```
 
 **Params**
@@ -468,10 +529,10 @@ float polyhedron = _fDodecahedron(vec3 p, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fIcosahedron()`
+#### `fIcosahedron()`
 
 ```glsl
-float polyhedron = _fIcosahedron(vec3 p, float r);
+float polyhedron = fIcosahedron(vec3 p, float r);
 ```
 
 **Params**
@@ -481,10 +542,10 @@ float polyhedron = _fIcosahedron(vec3 p, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fTruncatedOctahedron()`
+#### `fTruncatedOctahedron()`
 
 ```glsl
-float polyhedron = _fIcosahedron(vec3 p, float r);
+float polyhedron = fIcosahedron(vec3 p, float r);
 ```
 
 **Params**
@@ -494,10 +555,10 @@ float polyhedron = _fIcosahedron(vec3 p, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-### `_fTruncatedIcosahedron()`
+#### `fTruncatedIcosahedron()`
 
 ```glsl
-float polyhedron = _fTruncatedIcosahedron(vec3 p, float r);
+float polyhedron = fTruncatedIcosahedron(vec3 p, float r);
 ```
 
 **Params**
@@ -507,7 +568,7 @@ float polyhedron = _fTruncatedIcosahedron(vec3 p, float r);
 
 **Returns**: <code>float</code> - the distance from the object at the given point
 
-## Domain Manipulation Operators
+### Domain Manipulation Operators
 
 Conventions:
 Everything that modifies the domain is named pSomething.
@@ -522,13 +583,13 @@ parameters of the distance functions inside the cells.
 Unless stated otherwise, for cell index 0, <p> is unchanged and cells
 are centered on the origin so objects don't have to be moved to fit.
 
-### `_pR()`
+#### `pR()`
 Rotate around a coordinate axis (i.e. in a plane perpendicular to that axis) by angle `a`. Read like this: `R(p.xz, a)` rotates "x towards z".
 This is fast if `a` is a compile-time constant and slower (but still practical) if not.
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-_pR(inout vec2 p, float a);
+pR(inout vec2 p, float a);
 ```
 
 **Params**
@@ -536,25 +597,25 @@ _pR(inout vec2 p, float a);
 - p <code>vec2</code> - a point in space
 - r <code>float</code> - the rotation amount
 
-### `_pR45()`
+#### `pR45()`
 Shortcut for 45-degrees rotation
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-_pR45(inout vec2 p);
+pR45(inout vec2 p);
 ```
 
 **Params**
 
 - p <code>vec2</code> - a point in space
 
-### `_pMod1()`
+#### `pMod1()`
 Repeat space along one axis. .
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
 //Use like this to repeat along the x axis:
-float cell = _pMod1(inout float p, float size); // using the return value is optional
+float cell = pMod1(inout float p, float size); // using the return value is optional
 ```
 
 **Params**
@@ -564,12 +625,12 @@ float cell = _pMod1(inout float p, float size); // using the return value is opt
 
 **Returns**: <code>float</code> - the current cell
 
-### `_pModMirror1()`
+#### `pModMirror1()`
 Same, but mirror every second cell so they match at the boundaries
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float cell = _pModMirror1(inout float p, float size); 
+float cell = pModMirror1(inout float p, float size); 
 ```
 
 **Params**
@@ -579,12 +640,12 @@ float cell = _pModMirror1(inout float p, float size);
 
 **Returns**: <code>float</code> - the current cell
 
-### `_pModSingle1()`
+#### `pModSingle1()`
 Repeat the domain only in positive direction. Everything in the negative half-space is unchanged.
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float cell = _pModSingle1(inout float p, float size); 
+float cell = pModSingle1(inout float p, float size); 
 ```
 
 **Params**
@@ -594,12 +655,12 @@ float cell = _pModSingle1(inout float p, float size);
 
 **Returns**: <code>float</code> - the current cell
 
-### `_pModInterval1()`
+#### `pModInterval1()`
 Repeat only a few times: from indices `start` to `stop` (similar to above, but more flexible)
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float cell = _pModInterval1(inout float p, float size, float start, float stop); 
+float cell = pModInterval1(inout float p, float size, float start, float stop); 
 ```
 
 **Params**
@@ -611,12 +672,12 @@ float cell = _pModInterval1(inout float p, float size, float start, float stop);
 
 **Returns**: <code>float</code> - the current cell
 
-### `_pModPolar()`
+#### `pModPolar()`
 Repeat around the origin by a fixed angle. For easier use, num of repetitions is used to specify the angle.
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float cell = _pModPolar(inout vec2 p, float repetitions); 
+float cell = pModPolar(inout vec2 p, float repetitions); 
 ```
 
 **Params**
@@ -626,12 +687,12 @@ float cell = _pModPolar(inout vec2 p, float repetitions);
 
 **Returns**: <code>float</code> - the current cell
 
-### `_pMod2()`
+#### `pMod2()`
 Repeat in two dimensions
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float cell = _pMod2(inout vec2 p, vec2 size); 
+float cell = pMod2(inout vec2 p, vec2 size); 
 ```
 
 **Params**
@@ -641,12 +702,12 @@ float cell = _pMod2(inout vec2 p, vec2 size);
 
 **Returns**: <code>float</code> - the current cell
 
-### `_pModMirror2()`
+#### `pModMirror2()`
 Same, but mirror every second cell so all boundaries match
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float cell = _pModMirror2(inout vec2 p, vec2 size); 
+float cell = pModMirror2(inout vec2 p, vec2 size); 
 ```
 
 **Params**
@@ -656,12 +717,12 @@ float cell = _pModMirror2(inout vec2 p, vec2 size);
 
 **Returns**: <code>float</code> - the current cell
 
-### `_pModGrid2()`
+#### `pModGrid2()`
 Same, but mirror every second cell at the diagonal as well
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float cell = _pModMirror2(inout vec2 p, vec2 size); 
+float cell = pModMirror2(inout vec2 p, vec2 size); 
 ```
 
 **Params**
@@ -671,12 +732,12 @@ float cell = _pModMirror2(inout vec2 p, vec2 size);
 
 **Returns**: <code>float</code> - the current cell
 
-### `_pMod3()`
+#### `pMod3()`
 Repeat in three dimensions
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float cell = _pMod3(inout vec2 p, vec3 size); 
+float cell = pMod3(inout vec2 p, vec3 size); 
 ```
 
 **Params**
@@ -686,12 +747,12 @@ float cell = _pMod3(inout vec2 p, vec3 size);
 
 **Returns**: <code>float</code> - the current cell
 
-### `_pMirror()`
+#### `pMirror()`
 Mirror at an axis-aligned plane which is at a specified distance `dist` from the origin.
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float mirror = _pMirror(inout vec2 p, float dist); 
+float mirror = pMirror(inout vec2 p, float dist); 
 ```
 
 **Params**
@@ -701,12 +762,12 @@ float mirror = _pMirror(inout vec2 p, float dist);
 
 **Returns**: <code>float</code> - the sign of the mirror
 
-### `_pMirrorOctant()`
+#### `pMirrorOctant()`
 Mirror in both dimensions and at the diagonal, yielding one eighth of the space.translate by dist before mirroring.
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float cell = _pMirrorOctant(inout vec2 p, float dist); 
+float cell = pMirrorOctant(inout vec2 p, float dist); 
 ```
 
 **Params**
@@ -716,12 +777,12 @@ float cell = _pMirrorOctant(inout vec2 p, float dist);
 
 **Returns**: <code>float</code> - the sign of the mirror
 
-### `_pReflect()`
+#### `pReflect()`
 Reflect space at a plane
 
 **Directly modifies the input vector as an `inout` parameter**
 ```glsl
-float reflection = _pReflect(inout vec3 p, vec3 planeNormal, float offset); 
+float reflection = pReflect(inout vec3 p, vec3 planeNormal, float offset); 
 ```
 
 **Params**
@@ -733,7 +794,7 @@ float reflection = _pReflect(inout vec3 p, vec3 planeNormal, float offset);
 **Returns**: <code>float</code> - the sign of the mirror
 
 
-## Object Combination Operators
+### Object Combination Operators
 We usually need the following boolean operators to combine two objects:
 Union: OR(a,b)
 Intersection: AND(a,b)
@@ -783,11 +844,11 @@ float fTwoBoxes(vec3 p) {
 }
 ```
 
-### `_fOpUnionChamfer()`
+#### `fOpUnionChamfer()`
 The "Chamfer" flavour makes a 45-degree chamfered edge (the diagonal of a square of size `r`)
 
 ```glsl
-float mergedGeom = _fOpUnionChamfer(float a, float b, float r); 
+float mergedGeom = fOpUnionChamfer(float a, float b, float r); 
 ```
 
 **Params**
@@ -798,11 +859,11 @@ float mergedGeom = _fOpUnionChamfer(float a, float b, float r);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpIntersectionChamfer()`
+#### `fOpIntersectionChamfer()`
 Intersection has to deal with what is normally the inside of the resulting object when using union, which we normally don't care about too much. Thus, intersection implementations sometimes differ from union implementations.
 
 ```glsl
-float mergedGeom = _fOpIntersectionChamfer(float a, float b, float r); 
+float mergedGeom = fOpIntersectionChamfer(float a, float b, float r); 
 ```
 
 **Params**
@@ -813,11 +874,11 @@ float mergedGeom = _fOpIntersectionChamfer(float a, float b, float r);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpDifferenceChamfer()`
+#### `fOpDifferenceChamfer()`
 Difference can be built from Intersection or Union
 
 ```glsl
-float mergedGeom = _fOpDifferenceChamfer(float a, float b, float r); 
+float mergedGeom = fOpDifferenceChamfer(float a, float b, float r); 
 ```
 
 **Params**
@@ -828,11 +889,11 @@ float mergedGeom = _fOpDifferenceChamfer(float a, float b, float r);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpUnionRound()`
+#### `fOpUnionRound()`
 The "Round" variant uses a quarter-circle to join the two objects smoothly:
 
 ```glsl
-float mergedGeom = _fOpUnionRound(float a, float b, float r); 
+float mergedGeom = fOpUnionRound(float a, float b, float r); 
 ```
 
 **Params**
@@ -843,10 +904,10 @@ float mergedGeom = _fOpUnionRound(float a, float b, float r);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpIntersectionRound()`
+#### `fOpIntersectionRound()`
 
 ```glsl
-float mergedGeom = _fOpIntersectionRound(float a, float b, float r); 
+float mergedGeom = fOpIntersectionRound(float a, float b, float r); 
 ```
 
 **Params**
@@ -857,10 +918,10 @@ float mergedGeom = _fOpIntersectionRound(float a, float b, float r);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpDifferenceRound()`
+#### `fOpDifferenceRound()`
 
 ```glsl
-float mergedGeom = _fOpDifferenceRound(float a, float b, float r); 
+float mergedGeom = fOpDifferenceRound(float a, float b, float r); 
 ```
 
 **Params**
@@ -871,11 +932,11 @@ float mergedGeom = _fOpDifferenceRound(float a, float b, float r);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpUnionColumns()`
+#### `fOpUnionColumns()`
 The "Columns" flavour makes n-1 circular columns at a 45 degree angle
 
 ```glsl
-float mergedGeom = _fOpDifferenceRound(float a, float b, float r, float n); 
+float mergedGeom = fOpDifferenceRound(float a, float b, float r, float n); 
 ```
 
 **Params**
@@ -887,10 +948,10 @@ float mergedGeom = _fOpDifferenceRound(float a, float b, float r, float n);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpDifferenceColumns()`
+#### `fOpDifferenceColumns()`
 
 ```glsl
-float mergedGeom = _fOpDifferenceColumns(float a, float b, float r, float n); 
+float mergedGeom = fOpDifferenceColumns(float a, float b, float r, float n); 
 ```
 
 **Params**
@@ -902,10 +963,10 @@ float mergedGeom = _fOpDifferenceColumns(float a, float b, float r, float n);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpIntersectionColumns()`
+#### `fOpIntersectionColumns()`
 
 ```glsl
-float mergedGeom = _fOpIntersectionColumns(float a, float b, float r, float n); 
+float mergedGeom = fOpIntersectionColumns(float a, float b, float r, float n); 
 ```
 
 **Params**
@@ -917,11 +978,11 @@ float mergedGeom = _fOpIntersectionColumns(float a, float b, float r, float n);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpUnionStairs()`
+#### `fOpUnionStairs()`
 The "Stairs" flavour produces n-1 steps of a staircase
 
 ```glsl
-float mergedGeom = _fOpUnionStairs(float a, float b, float r, float n); 
+float mergedGeom = fOpUnionStairs(float a, float b, float r, float n); 
 ```
 
 **Params**
@@ -933,10 +994,10 @@ float mergedGeom = _fOpUnionStairs(float a, float b, float r, float n);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpIntersectionStairs()`
+#### `fOpIntersectionStairs()`
 
 ```glsl
-float mergedGeom = _fOpIntersectionStairs(float a, float b, float r, float n); 
+float mergedGeom = fOpIntersectionStairs(float a, float b, float r, float n); 
 ```
 
 **Params**
@@ -948,10 +1009,10 @@ float mergedGeom = _fOpIntersectionStairs(float a, float b, float r, float n);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpDifferenceStairs()`
+#### `fOpDifferenceStairs()`
 
 ```glsl
-float mergedGeom = _fOpDifferenceStairs(float a, float b, float r, float n); 
+float mergedGeom = fOpDifferenceStairs(float a, float b, float r, float n); 
 ```
 
 **Params**
@@ -963,11 +1024,11 @@ float mergedGeom = _fOpDifferenceStairs(float a, float b, float r, float n);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpUnionSoft()`
+#### `fOpUnionSoft()`
 Similar to fOpUnionRound, but more lipschitz-y at acute angles (and less so at 90 degrees). Useful when fudging around too much
 
 ```glsl
-float mergedGeom = _fOpUnionSoft(float a, float b, float r); 
+float mergedGeom = fOpUnionSoft(float a, float b, float r); 
 ```
 
 **Params**
@@ -978,11 +1039,11 @@ float mergedGeom = _fOpUnionSoft(float a, float b, float r);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpPipe()`
+#### `fOpPipe()`
 Produces a cylindical pipe that runs along the intersection. No objects remain, only the pipe. This is not a boolean operator.
 
 ```glsl
-float mergedGeom = _fOpPipe(float a, float b, float r); 
+float mergedGeom = fOpPipe(float a, float b, float r); 
 ```
 
 **Params**
@@ -993,11 +1054,11 @@ float mergedGeom = _fOpPipe(float a, float b, float r);
 
 **Returns**: <code>float</code> - the distanced to the object
 
-### `_fOpEngrave()`
+#### `fOpEngrave()`
 First object gets a v-shaped engraving where it intersect the second
 
 ```glsl
-float mergedGeom = _fOpEngrave(float a, float b, float r); 
+float mergedGeom = fOpEngrave(float a, float b, float r); 
 ```
 
 **Params**
@@ -1008,11 +1069,11 @@ float mergedGeom = _fOpEngrave(float a, float b, float r);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpGroove()`
+#### `fOpGroove()`
 First object gets a capenter-style groove cut out
 
 ```glsl
-float mergedGeom = _fOpGroove(float a, float b, float ra, float rb); 
+float mergedGeom = fOpGroove(float a, float b, float ra, float rb); 
 ```
 
 **Params**
@@ -1024,11 +1085,11 @@ float mergedGeom = _fOpGroove(float a, float b, float ra, float rb);
 
 **Returns**: <code>float</code> - the distance of the merged geometry
 
-### `_fOpTongue()`
+#### `fOpTongue()`
 First object gets a capenter-style tongue attached
 
 ```glsl
-float mergedGeom = _fOpTongue(float a, float b, float ra, float rb); 
+float mergedGeom = fOpTongue(float a, float b, float ra, float rb); 
 ```
 
 **Params**
