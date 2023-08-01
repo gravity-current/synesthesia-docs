@@ -38,5 +38,5 @@ Uniform | Description
 ## Media Uniforms
 Uniform | Description
 ------------ | -------------
-`sampler2D syn_UserImage` | The texture of the current media selected in the media section of the control panel. **NOTE:** to load this texture into your scene, you should use the [`loadUserImage()` function](functions.md#_loaduserimage) or [`textureUserImage()` function](functions.md#_textureuserimage)
-`float syn_MediaType` | Indicates the type of the current media: `None = 0`, `Image = 1`, `Video = 2`, `Webcam = 3`. You can check if media is loaded with `syn_MediaType > 0.5`.
+`sampler2D syn_Media` | The texture of the current media selected in the media section of the control panel. **NOTE:** to load this texture into your scene, you should generally use the [`loadMedia()` function](functions.md#_loadMedia) or [`textureMedia()` function](functions.md#_texturemedia)
+`float syn_MediaType` | Indicates the type of the current media: `None = 0`, `Image = 1`, `Video = 2`, `Webcam = 3`. You can check if media is loaded with `syn_MediaType > 0.5` or the [`_isMediaActive()` function](functions.md#_ismediaactive).
