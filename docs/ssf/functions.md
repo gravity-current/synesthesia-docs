@@ -17,7 +17,27 @@ float scaledValue = _scale(float value, float min, float max);
 - min <code>float</code> - the lower bound for scaling
 - max <code>float</code> - the upper bound for scaling
 
-**Returns**: <code>float</code> - the scaled value  
+**Returns**: <code>float</code> - the scaled value
+
+### `_map()`
+
+Map a value inside of a given range to a new range, scaling the value linearly.
+```glsl
+float scaledValue = _map(float value, float min, float max, float new_min, float new_max);
+vec2 scaledValue = _map(vec2 value, vec2 min, vec2 max, vec2 new_min, vec2 new_max);
+vec3 scaledValue = _map(vec3 value, vec3 min, vec3 max, vec3 new_min, vec3 new_max);
+vec4 scaledValue = _map(vec4 value, vec4 min, vec4 max, vec4 new_min, vec4 new_max);
+```
+
+**Params**
+
+- value <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - a value inside of the min and max range
+- min <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the current min value
+- max <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the current max value
+- new_min <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the new min value
+- new_max <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the new max value
+
+**Returns**: <code>float</code> - the current value mapped to the new range
 
 ### `_smin()`
 
@@ -66,7 +86,7 @@ float pulseValue = _pulse(float position, float center, float size);
 **Returns**: <code>float</code> - the value of the pulse at the given position
 
 **Example**  
-```js
+```glsl
 // A spatial pulse, generating a gradient that moves back and forth across the screen 
 return vec4(_pulse(_uv.x, sin(TIME)*0.5+0.5, 0.5));
 // A temporal pulse, generating a ramp of color that peaks every second
@@ -87,7 +107,28 @@ float pulseValue = _pulse(float position, float center, float size);
 - center <code>float</code> - the centerpoint of the pulse within the range `0` to `1`
 - size <code>float</code> - the width or duration of the pulse
 
-**Returns**: <code>float</code> - the value of the pulse at the given position  
+**Returns**: <code>float</code> - the value of the pulse at the given position
+
+### `_inRange()`
+Check if a value or all components of a vector are within a given range. Returns a float so it can easily be used as a mask or mix value.
+
+```glsl
+float inRange = _inRange(float value);
+float inRange = _inRange(float value, float min, float max);
+float inRange = _inRange(vec2 value);
+float inRange = _inRange(vec2 value, float min, float max);
+float inRange = _inRange(vec3 value);
+float inRange = _inRange(vec3 value, float min, float max);
+float inRange = _inRange(vec4 value);
+float inRange = _inRange(vec4 value, float min, float max);
+```
+
+**Params**
+- value <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the value to check
+- [min] <code>float</code> - the lower bound of the range (defaults to `0` if omitted)
+- [max] <code>float</code> - the upper bound of the range (defaults to `1` if omitted)
+
+**Returns**: <code>float</code> - `1.0` if the value is within the range, `0.0` if it is not
 
 ### `_triWave()`
 
@@ -122,7 +163,7 @@ vec3 pixelatedValue = _pixelate(vec3 value, float amount);
 **Returns**: <code>float</code> \| <code>vec2</code> \| <code>vec3</code> - the pixelated value
 
 **Example**  
-```js
+```glsl
 // With an amount of 5, any input in the range 0-1 will be set to 1 of 5 values
 _pixelate(0.2, 5);           // returns 0.2
 _pixelate(0.456, 5);         // returns 0.4
@@ -203,7 +244,8 @@ float wave = _nsin(float valIn);
 
 - valIn <code>float</code> - the value inside of the `sin()` function
 
-**Returns**: <code>float</code> - the value of the wave at the given position, ranging from `0` to `1` 
+**Returns**: <code>float</code> - the value of the wave at the given position, ranging from `0` to `1`
+
 ### `_ncos()`
 
 Generates a cosine wave with values normalized between 0 and 1
@@ -213,12 +255,14 @@ float wave = _ncos(float valIn);
 
 **Params**
 
-- valIn <code>float</code> - the value inside of the `sin()` function
+- valIn <code>float</code> - the value inside of the `cos()` function
 
-**Returns**: <code>float</code> - the value of the wave at the given position, ranging from `0` to `1` 
+**Returns**: <code>float</code> - the value of the wave at the given position, ranging from `0` to `1`
+
 ### `_nclamp()`
 
-clamps a given value between 0 and 1. useful to use with a `mix` function where a value over `1` can cause issues on certain GPUs.
+Clamps a given value between 0 and 1. Useful with a `mix` function where a value over `1` can cause issues on some GPUs.
+
 ```glsl
 float clampedVal = _nclamp(float var);
 vec2 clampedVal = _nclamp(vec2 var);
@@ -228,28 +272,9 @@ vec4 clampedVal = _nclamp(vec4 var);
 
 **Params**
 
-- valIn <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the value inside of the `clamp()` function
+- valIn <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the value to clamp
 
 **Returns**: <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the clamped value
-### `_mapValue()`
-
-Map a value inside of a given range to a new range, scaling the value linearly.
-```glsl
-float scaledValue = _mapValue(float value, float min, float max, float new_min, float new_max);
-vec2 scaledValue = _mapValue(vec2 value, vec2 min, vec2 max, vec2 new_min, vec2 new_max);
-vec3 scaledValue = _mapValue(vec3 value, vec3 min, vec3 max, vec3 new_min, vec3 new_max);
-vec4 scaledValue = _mapValue(vec4 value, vec4 min, vec4 max, vec4 new_min, vec4 new_max);
-```
-
-**Params**
-
-- value <code>float</code> - a value inside of the min and max range
-- min <code>float</code> - the current min value
-- max <code>float</code> - the current max value
-- new_min <code>float</code> - the new min value
-- new_max <code>float</code> - the new max value
-
-**Returns**: <code>float</code> - the current value mapped to the new range
 
 ## Noise
 
@@ -275,13 +300,17 @@ Creates 1D, 2D, or 3D fractal noise, using fractal/fractional Brownian motion ([
 which looks self-similar at all scales
 ```glsl
 float noise = _fbm(float seed);
+float noise = _fbm(float seed, float octave);
 float noise = _fbm(vec2 seed);
+float noise = _fbm(vec2 seed, float octave);
 float noise = _fbm(vec3 seed);
+float noise = _fbm(vec3 seed, float octave);
 ```
 
 **Params**
 
 - seed <code>float</code> | <code>vec2</code> | <code>vec3</code> - the seed used to generate the noise value
+- [octave] <code>float</code> - the number of octaves to calculate. More octaves creates more detailed noise. Default is `5`
 
 **Returns**: <code>float</code> - a noise value in the range `0` to `1`  
 
@@ -323,7 +352,6 @@ vec4 hash = _hash41(float p);
 vec4 hash = _hash42(vec2 p);
 vec4 hash = _hash43(vec3 p);
 vec4 hash = _hash44(vec4 p);
-
 ```
 
 **Params**
@@ -375,7 +403,31 @@ vec2 rotatedVector = _rotate(vec2 vector, float theta);
 - vector <code>vec2</code> - the vector to be rotated
 - theta <code>float</code> - the degrees to rotate
 
-**Returns**: <code>vec2</code> - the rotated vector  
+**Returns**: <code>vec2</code> - the rotated vector
+
+### `_mirror()`
+
+Mirrors a value or coordinate to allow seamless repetitions or tilings
+
+```glsl
+float mirrored = _mirror(float value);
+vec2 mirrored = _mirror(vec2 value);
+vec3 mirrored = _mirror(vec3 value);
+vec4 mirrored = _mirror(vec4 value);
+```
+
+**Params**
+
+- value <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the value to be mirrored
+
+**Returns**: <code>float</code> | <code>vec2</code> | <code>vec3</code> | <code>vec4</code> - the mirrored value
+
+**Example**  
+```glsl
+// sample media with mirrored coordinates so it creates a seamless tile
+vec2 mirroredCoords = _mirror(_uv);
+vec4 media = textureMedia(mirroredCoords * 10);
+```
 
 ### `_toPolar()`
 
@@ -415,7 +467,6 @@ vec2 cartesianVector = _toRect(vec2 rt);
 - rt <code>vec2</code> - the polar vector to convert to cartesian coordinates
 
 **Returns**: <code>vec2</code> - a cartesian vector in the form `(x, y)`  
-
 
 ## Color
 
@@ -480,107 +531,202 @@ vec3 paletteColor = _palette(float index, vec3 biases, vec3 amps, vec3 freqs, ve
 
 **Returns**: <code>vec3</code> - a color within the generated palette  
 
-### `_grayScale()`
+### `_brightness()`
 
-Converts an RGB or RGBA color vector into a grayscale vector based on the sRGB color space.
+Set the brightness of a color.
 ```glsl
-vec3 grayscaleRGB = _grayScale(vec3 rgb, float intensity);
-vec4 grayscaleRGBA = _grayScale(vec4 rgba, float intensity);
+vec3 adjustedColor = _brightness(vec3 color, float brightness);
+vec4 adjustedColor = _brightness(vec4 color, float brightness);
 ```
 
 **Params**
+- color <code>vec3</code> | <code>vec4</code> - the color to adjust
+- brightness `float` - the brightness value to set the color to. `0.0` is black, `1.0` is no change, `2.0` is twice as bright, etc.
 
-- RGB <code>vec3</code> | <code>vec4</code> - a normalized color vector
-- intensity <code>float</code> - a normalized value that determines how much to grayscale the given vector. a value of 1 will give full grayscale.
+**Returns**: <code>vec3</code> | <code>vec4</code> - the adjusted color
 
-**Returns**: <code>vec3</code> | <code>vec4</code>- a grayscale vector in the form `(red, green, blue, (alpha))`
-### `_diChrome()`
+### `_gamma()`
 
-Converts an RGB or RGBA color vector into a two tone color.
+Apply gamma correction to a color, making the midtones brighter/darker without affecting the shadows or highlights.
 ```glsl
-vec3 diChromeRGB = _diChrome(vec3 rgb, vec3 color1, vec3 color2);
-vec4 diChromeRGBA = _diChrome(vec4 rgba, vec3 color1, vec3 color2);
+vec3 adjustedColor = _gamma(vec3 color, float gamma);
+vec4 adjustedColor = _gamma(vec4 color, float gamma);
 ```
 
 **Params**
+- color <code>vec3</code> | <code>vec4</code> - the color to adjust
+- gamma `float` - the gamma correction value. `0.5` makes the color generally darker, `1.0` is no change, `1.5` makes it brighter
 
-- RGB <code>vec3</code> | <code>vec4</code> - a normalized color vector
-- color1 <code>vec3</code> - the first rgb color vector to re-color to
-- color2 <code>vec3</code> - the second rgb color vector to re-color to
+**Returns**: <code>vec3</code> | <code>vec4</code> - the adjusted color
 
-**Returns**: <code>vec3</code> | <code>vec4</code> - a color vector in the form `(red, green, blue, (alpha))`
+### `_contrast()`
+
+Adjust the contrast of a color. More contrast makes the brights brighter and the darks darker.
+```glsl
+vec3 adjustedColor = _contrast(vec3 color, float contrast);
+vec4 adjustedColor = _contrast(vec4 color, float contrast);
+```
+
+**Params**
+- color <code>vec3</code> | <code>vec4</code> - the color to adjust
+- contrast `float` - the contrast value. `0` is solid gray, `1` is no change, `2` is twice as much contrast, etc.
+
+**Returns**: <code>vec3</code> | <code>vec4</code> - the adjusted color
+
+### `_saturation()`
+
+Adjust the saturation or intensity of a color by scaling it.
+
+```glsl
+vec3 adjustedColor = _saturation(vec3 color, float saturation);
+vec4 adjustedColor = _saturation(vec4 color, float saturation);
+```
+
+**Params**
+- color <code>vec3</code> | <code>vec4</code> - the color to adjust
+- saturation `float` - the saturation value. `0.5` makes it half as saturated, `1` is no change, `2` is twice as saturated, etc.
+
+**Returns**: <code>vec3</code> | <code>vec4</code> - the adjusted color
 
 ### `_hueRotate()`
 
-Rotates a given color around the hue wheel
+Rotates a color around the hue wheel
+
 ```glsl
-vec3 newColor = _hueRotate(vec3 rgb, float rot);
+vec3 adjustedColor = _hueRotate(vec3 color, float rot);
+vec4 adjustedColor = _hueRotate(vec4 color, float rot);
 ```
 
 **Params**
 
-- RGB <code>vec3</code> | <code>vec4</code> - a normalized color vector
-- rot <code>float</code> - The rotation value in degrees
+- color <code>vec3</code> | <code>vec4</code> - a normalized color vector
+- rot <code>float</code> - rotation value in degrees
 
-**Returns**: <code>vec3</code> - a color vector in the form `(red, green, blue)`
+**Returns**: <code>vec3</code> | <code>vec4</code> - the adjusted color
 
+### `_invert()`
+
+Invert a color
+
+```glsl
+vec3 invertedColor = _invert(vec3 color, float invert);
+vec4 invertedColor = _invert(vec4 color, float invert);
+```
+
+**Params**
+
+- color <code>vec3</code> | <code>vec4</code> - color to be inverted
+- invert <code>float</code> - amount to invert the color. `0` is no change, `1` is fully inverted
+
+**Returns**: <code>vec3</code> | <code>vec4</code> - the inverted color
+
+
+### `_luminance()`
+
+Calculate the luminance of a color, which approximates how bright it appears to humans.
+
+```glsl
+float luminance = _luminance(vec3 color);
+float luminance = _luminance(vec4 color);
+```
+
+**Params**
+- color <code>vec3</code> | <code>vec4</code> - the color to calculate the luminance of
+
+**Returns**: `float` - the luminance of the color
+
+### `_grayscale()`
+
+Converts an RGB or RGBA color vector into a grayscale vector based on its luminance.
+```glsl
+vec3 grayscaleColor = _grayscale(vec3 color);
+vec4 grayscaleColor = _grayscale(vec4 color);
+vec3 grayscaleColor = _grayscale(vec3 color, float intensity);
+vec4 grayscaleColor = _grayscale(vec4 color, float intensity);
+```
+
+**Params**
+
+- color <code>vec3</code> | <code>vec4</code> - the color to adjust
+- [intensity] <code>float</code> - intensity of the effect. `1` is full grayscale, `0` is no change. Defaults to `1` if left out
+
+**Returns**: <code>vec3</code> | <code>vec4</code> - the grayscaled color
+
+### `_dichrome()`
+Converts an RGB or RGBA color vector into a two tone color. Dark colors will be mapped to color1, and light colors will be mapped to color2.
+
+```glsl
+vec3 dichromeColor = _diChrome(vec3 color, vec3 color1, vec3 color2);
+vec4 dichromeColor = _diChrome(vec4 color, vec3 color1, vec3 color2);
+```
+
+**Params**
+
+- color <code>vec3</code> | <code>vec4</code> - the color to be affected
+- color1 <code>vec3</code> - the color dark colors will be mapped to
+- color2 <code>vec3</code> - the color light colors will be mapped to
+
+**Returns**: <code>vec3</code> | <code>vec4</code> - the converted dichrome color
 
 ## Media
 
-### `_loadUserImage()`
+### `_loadMedia()`
 
 Loads the color of the selected user media at the current pixel, optionally adjusted by an offset.
 
 ```glsl
-vec4 userImageColor = _loadUserImage();
-vec4 userImageColor = _loadUserImage(vec2 offset);
+vec4 mediaColor = _loadMedia();
+vec4 mediaColor = _loadMedia(float lod);
+vec4 mediaColor = _loadMedia(vec2 offset);
+vec4 mediaColor = _loadMedia(vec2 offset, float lod);
 ```
 
 **Params**
 
+- [lod] <code>float</code> - the level of detail to use when sampling the texture. **NOTE:** only works when media filter mode is set to `"mipmap"` (see [media JSON configuration](json.md#media))
 - [offset] <code>vec2</code> - the offset from the current pixel to sample the texture
 
 **Returns**: <code>vec4</code> - the color of the user media at the current pixel (adjusted by offset)
 
-### `_textureUserImage()`
+### `_textureMedia()`
 
-Samples user media at custom uv coordinates. It is important to use this function instead of the standard `texture()` function, since it handles all of Synesthesia's media effects and correction. 
-
-**NOTE**: While `_loadUserImage()` includes aspect-ratio correction so the user media does not appear stretched, this function does not. You can use the `_correctUserImageCoords()` function to correct for this.
-
+Samples user media at custom uv coordinates. Includes aspect ratio correction, so the media will not appear stretched. If you want to sample media without any correction, use `texture(syn_Media)`
 
 ```glsl
-vec4 userImageColor = _textureUserImage(vec2 uv);
+vec4 mediaColor = _textureMedia(vec2 uv);
+vec4 mediaColor = _textureMedia(vec2 uv, float lod);
 ```
 
 **Params**
 
 - uv <code>vec2</code> - the uv coordinates at which to sample the user media (should be in the range 0-1)
+- [lod] <code>float</code> - the level of detail to use when sampling the texture. **NOTE:** only works when media filter mode is set to `"mipmap"` (see [media JSON configuration](json.md#media))
 
 **Returns**: <code>vec4</code> - the color of the user media at the given uv coordinates
 
-### `_loadUserImageAsMask()`
+### `_loadMediaAsMask()`
 
 Loads the selected user media at the current pixel as a mask, with values thresholded to be either `0.0` or `1.0`.
 By multiplying a color vector by one of the output channels (`r`, `g`, and `b` are the same), you can mask the color
 to only appear when the user image is prominent.
 ```glsl
-vec4 userImageMask = _loadUserImageAsMask();
-vec4 userImageMask = _loadUserImageAsMask(vec2 offset);
+vec4 mediaMask = _loadMediaAsMask();
+vec4 mediaMask = _loadMediaAsMask(vec2 offset);
 ```
 
 **Params**
 
+- [lod] <code>float</code> - the level of detail to use when sampling the texture. **NOTE:** only works when media filter mode is set to `"mipmap"` (see [media JSON configuration](json.md#media))
 - [offset] <code>vec2</code> - the offset from the current pixel to sample the texture
 
 **Returns**: <code>vec4</code> - the thresholded color of the user media at the current pixel (adjusted by offset). Either `vec4(0.0)` or `vec4(1.0)`  
 
-### `_textureUserImageAsMask()`
+### `_textureMediaAsMask()`
 
 Samples user media at the given coordinates as a mask, with values thresholded to be either `0.0` or `1.0`. By multiplying a color vector by one of the output channels (`r`, `g`, and `b` are the same), you can mask the color to only appear when the user image is prominent.
 
 ```glsl
-vec4 userImageMask = _textureUserImageAsMask(vec2 uv);
+vec4 mediaMask = _textureMediaAsMask(vec2 uv);
 ```
 
 **Params**
@@ -589,19 +735,20 @@ vec4 userImageMask = _textureUserImageAsMask(vec2 uv);
 
 **Returns**: <code>vec4</code> - the thresholded color of the user media at the given coordinates. Either `vec4(0.0)` or `vec4(1.0)`
 
-### `_correctUserImageCoords()`
+### `_correctMediaCoords()`
 
-Correct the aspect ratio of uv coordinates so they can be used to sample user media without appearing stretched. It scales the coordinates based on the aspect ratio of `sampler2D syn_UserImage`, which stores user media.
+Correct the aspect ratio of uv coordinates so they can be used to sample user media without appearing stretched. It scales the coordinates based on the aspect ratio of `sampler2D syn_Media`, which stores user media.
 
 ```glsl
-vec2 aspectCorrectedCoords = _correctUserImageCoords(vec2 uv);
+vec2 aspectCorrectedCoords = _correctMediaCoords();
+vec2 aspectCorrectedCoords = _correctMediaCoords(vec2 uv);
 ```
 
 **Params**
 
-- uv <code>vec2</code> - the uv coordinates to correct
+- [uv] <code>vec2</code> - the uv coordinates to correct. Will default to _uv if omitted
 
-**Returns**: <code>vec4</code> - the uv coordinates corrected for aspect ratio
+**Returns**: <code>vec2</code> - the uv coordinates corrected for aspect ratio
 
 ### `_isMediaActive()`
 
@@ -613,153 +760,111 @@ bool isMediaActive = _isMediaActive();
 
 **Returns**: <code>bool</code> - `true` if media is selected and `false` if "none" is selected
 
-### `_exists()`
-
-Determines if a texture exists. Use this function to check if user media has been selected
-```glsl
-bool doesSamplerExist = _exists(sampler2D texture);
-```
-
-**Params**
-
-- texture <code>sampler2D</code> - the texture variable to check
-
-**Returns**: <code>bool</code> - `true` if the texture exists, `false` if it does not  
-
-**Example**  
-```js
-// Check if media has been selected using the syn_UserImage 2Dsampler uniform
-if (_exists(syn_UserImage)) {
-  color *= _loadUserImageAsMask().r;
-}
-```
-
-### `_edgeDetectUserImage()`
+### `_edgeDetectMedia()`
 
 Detects edges of the selected user media inexpensively through a bilinear method.
 
 ```glsl
-vec4 mediaEdges = _edgeDetectUserImage();
+vec4 mediaEdges = _edgeDetectMedia();
 ```
 
 **Returns**: <code>vec4</code> - the color of the edges for the selected user media. This value is likely to be small
 
-### `_edgeDetectSobelUserImage()`
+### `_edgeDetectSobelMedia()`
 
 Detects edges of the currently selected user media using the sobel method. More info oon the sobel operator [can be found here.](https://en.wikipedia.org/wiki/Sobel_operator).
 
 ```glsl
-vec4 mediaEdges = _edgeDetectSobelUserImage();
+vec4 mediaEdges = _edgeDetectSobelMedia();
 ```
 
-
-**Returns**: <code>float</code> - a grayscale value corresponding to the edges of the currently selected media
+**Returns**: <code>vec4</code> - the edges of the currently selected media
 
 ## Multipass
 
-### `_edgeDetectSynPass()`
+### `_edgeDetect()`
 
 Detects edges of a given texture or syn pass inexpensively through a bilinear method.
 
 ```glsl
-vec4 passEdges = _edgeDetectSynPass(sampler2D texture);
+vec4 passEdges = _edgeDetect(sampler2D texture);
+vec4 passEdges = _edgeDetect(sampler2D texture, vec2 uv);
 ```
 
 **Params**
 
 - texture <code>sampler2D</code> - the texture or syn pass to calculate the edges for
+- [uv] <code>vec2</code> - the coordinates to sample the texture at. Defaults to `_uv`
 
 **Returns**: <code>vec4</code> - the color of the edges for the given texture. This value is likely to be small
-cd C()`
 
-Detects edges of a given texture or syn pass using the sobel method. More info oon the sobel operator [can be found here.](https://en.wikipedia.org/wiki/Sobel_operator).
+### `_edgeDetectSobel()`
+
+Detects edges of a given texture or syn pass through the sobel method. This is more expensive than `_edgeDetect` but produces better edges. More info on the sobel operator can be found [here](https://en.wikipedia.org/wiki/Sobel_operator).
 
 ```glsl
-vec4 passEdges = _edgeDetectSobelSynPass(sampler2D texture);
+vec4 passEdges = _edgeDetectSobel(sampler2D texture);
+vec4 passEdges = _edgeDetectSobel(sampler2D texture, vec2 uv);
 ```
 
 **Params**
 
 - texture <code>sampler2D</code> - the texture or syn pass to calculate the edges for
+- [uv] <code>vec2</code> - the coordinates to sample the texture at. Defaults to `_uv`
 
-**Returns**: <code>float</code> - a grayscale value corresponding to the edges of the given texture
+**Returns**: <code>vec4</code> - the color of the edges for the given texture
 
-### `_grayScaleSynPass()`
+### `_hBlurTiltShift()`
 
-Grayscales a given texture or syn pass
+Applies a tilt shift in the horizontal direction. Use in tandem with `_vBlurTiltShift()` in a second pass to create a tilt shift effect. Note that this effect can be very expensive!
 
 ```glsl
-vec4 userImage = _grayScaleSynPass(sampler2D texture, float intensity);
+vec4 blurred = _hBlurTiltShift(sampler2D texture);
+vec4 blurred = _hBlurTiltShift(sampler2D texture, vec2 uv);
+vec4 blurred = _hBlurTiltShift(sampler2D texture, vec2 uv, float blurAmt);
+vec4 blurred = _hBlurTiltShift(sampler2D texture, vec2 uv, float blurAmt, float blurLoc);
 ```
 
 **Params**
 
-- texture <code>sampler2D</code> - the texture or syn pass to grayscale
-- intensity <code>float</code> - a normalized value that determines how much to grayscale the given texture. a value of 1 will give full grayscale.
-
-**Returns**: <code>vec4</code> - the grayscale value of the given texture
-### `_diChromeSynPass()`
-
-Converts an RGB or RGBA color vector into a two tone color.
-```glsl
-vec3 diChromeRGB = _diChrome(vec3 rgb, vec3 color1, vec3 color2);
-vec4 diChromeRGBA = _diChrome(vec4 rgba, vec3 color1, vec3 color2);
-```
-
-**Params**
-
-- smp <code>sampler2D</code> - the texture or syn pass to re-color
-- color1 <code>vec3</code> - the first rgb color vector to re-color to
-- color2 <code>vec3</code> - the second rgb color vector to re-color to
-
-**Returns**: <code>vec4</code> - the dichromed value of the given texture
-### `_hBlurTiltShiftSynPass()`
-
-Applies a tilt shift in the horizontal direction. Use in tandem with `_vBlurTiltShiftSynPass()` in a second pass to create a tilt shift effect. Note that this effect can be very expensive!
-
-```glsl
-vec4 renderMain(void)
-{
-    if(PASSINDEX == 0) {
-      return _loadUserImage();
-    } else if (PASSINDEX == 1){
-      return _hBlurTiltShiftSynPass(sampler2D texIn, float blurAmt, float blurLoc);
-    } else if (PASSINDEX == 2) {
-      return _vBlurTiltShiftSynPass(sampler2D texIn, float blurAmt, float blurLoc);
-    } 
-}
-
-```
-
-**Params**
-
-- texIn <code>sampler2D</code> - the texture or syn pass to apply the effect to
-- blurAmt <code>float</code> - the blur level. This will add iterations to the blur loop, so lower will be faster
-- blurLoc <code>float</code> - the location of the blur
+- texIn <code>sampler2D</code> - the texture or pass to apply the effect to
+- [uv] <code>vec2</code> - the coordinates to sample the texture at. Defaults to `_uv`
+- [blurAmt] <code>float</code> - the blur level. This will add iterations to the blur loop, so lower will be faster. Default is 5.0
+- [blurLoc] <code>float</code> - the location of the blur. Default is 0.5
 
 **Returns**: <code>vec4</code> - the blurred texture
-### `_vBlurTiltShiftSynPass()`
 
-Applies a tilt shift in the vertical direction. Use in tandem with `_vBlurTiltShiftSynPass()` in a second pass to create a tilt shift effect. Note that this effect can be very expensive!
+**Example**:
 
 ```glsl
 vec4 renderMain(void)
 {
-    if(PASSINDEX == 0) {
-      return _loadUserImage();
-    } else if (PASSINDEX == 1){
-      return syn_pass_horBlurTiltShift(sampler2D texIn, float blurAmt, float blurLoc);
-    } else if (PASSINDEX == 2) {
-      return syn_pass_vertBlurTiltShift(sampler2D texIn, float blurAmt, float blurLoc);
-    } 
+	if (PASSINDEX == 0) {
+		return _loadMedia();
+	} else if (PASSINDEX == 1){
+		return _hBlurTiltShift(mediaPass, 5.0, 0.5);
+	} else if (PASSINDEX == 2) {
+		return _vBlurTiltShift(hPass, 5.0, 0.5);
+	} 
 }
+```
 
+### `_vBlurTiltShift()`
+
+Applies a tilt shift in the vertical direction. Use in tandem with `_vBlurTiltShift()` in a second pass to create a tilt shift effect. Note that this effect can be very expensive!
+
+```glsl
+vec4 blurred = _vBlurTiltShift(sampler2D texture);
+vec4 blurred = _vBlurTiltShift(sampler2D texture, vec2 uv);
+vec4 blurred = _vBlurTiltShift(sampler2D texture, vec2 uv, float blurAmt);
+vec4 blurred = _vBlurTiltShift(sampler2D texture, vec2 uv, float blurAmt, float blurLoc);
 ```
 
 **Params**
 
-- texIn <code>sampler2D</code> - the texture or syn pass to apply the effect to
-- blurAmt <code>float</code> - the blur level. This will add iterations to the blur loop, so lower will be faster
-- blurLoc <code>float</code> - the location of the blur
+- texIn <code>sampler2D</code> - the texture or pass to apply the effect to
+- [uv] <code>vec2</code> - the coordinates to sample the texture at. Defaults to `_uv`
+- [blurAmt] <code>float</code> - the blur level. This will add iterations to the blur loop, so lower will be faster. Default is 5.0
+- [blurLoc] <code>float</code> - the location of the blur. Default is 0.5
 
 **Returns**: <code>vec4</code> - the blurred texture
