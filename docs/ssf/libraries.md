@@ -34,23 +34,25 @@ The library includes a wide array of functions that touch nearly every aspect of
 #include "lygia/color/blend.glsl"		// all blend functions
 ```
 
-To learn more about the library and all its functions/files, check out the [github](https://github.com/patriciogonzalezvivo/lygia) or [website](https://lygia.xyz/). Here are links to documentation for each section of the library (copied from the website):
+To learn more about the library and all its functions/files, check out the [github](https://github.com/patriciogonzalezvivo/lygia) or [website](https://lygia.xyz/). 
+
+Here are links to documentation for each section of the library (copied from the website). **NOTE:** Synesthesia includes Lygia version **1.1.4**.
 
 <ul>
-	<li><a href="https://lygia.xyz/math"><code>math/</code></a>: general math functions and constants: <code>PI</code>, <code>SqrtLength()</code>, etc. </li>
-	<li><a href="https://lygia.xyz/space"><code>space/</code></a>: general spatial operations: <code>scale()</code>, <code>rotate()</code>, etc. </li>
-	<li><a href="https://lygia.xyz/color"><code>color/</code></a>: general color operations: <code>luma()</code>, <code>saturation()</code>, blend modes, palettes, color space conversion, and tonemaps.</li>
-	<li><a href="https://lygia.xyz/animation"><code>animation/</code></a>: animation operations: easing</li>
-	<li><a href="https://lygia.xyz/generative"><code>generative/</code></a>: generative functions: <code>random()</code>, <code>noise()</code>, etc. </li>
-	<li><a href="https://lygia.xyz/sdf"><code>sdf/</code></a>: signed distance field functions.</li>
-	<li><a href="https://lygia.xyz/draw"><code>draw/</code></a>: drawing functions like <code>digits()</code>, <code>stroke()</code>, <code>fill</code>, etc/.</li>
-	<li><a href="https://lygia.xyz/sample"><code>sample/</code></a>: sample operations</li>
-	<li><a href="https://lygia.xyz/filter"><code>filter/</code></a>: typical filter operations: different kind of blurs, mean and median filters.</li>
-	<li><a href="https://lygia.xyz/distort"><code>distort/</code></a>: distort sampling operations</li>
-	<li><a href="https://lygia.xyz/simulate"><code>simulate/</code></a>: simulate sampling operations</li>
-	<li><a href="https://lygia.xyz/lighting"><code>lighting/</code></a>: different lighting models and functions for foward/deferred/raymarching rendering</li>
-	<li><a href="https://lygia.xyz/geometry"><code>geometry/</code></a>: operation related to geometries: intersections and AABB accelerating structures.</li>
-	<li><a href="https://lygia.xyz/morphological"><code>morphological/</code></a>: morphological filters: dilation, erosion, alpha and poisson fill.</li>
+	<li><a href="https://lygia.xyz/v1.1.4/math"><code>math/</code></a>: general math functions and constants: <code>PI</code>, <code>SqrtLength()</code>, etc. </li>
+	<li><a href="https://lygia.xyz/v1.1.4/space"><code>space/</code></a>: general spatial operations: <code>scale()</code>, <code>rotate()</code>, etc. </li>
+	<li><a href="https://lygia.xyz/v1.1.4/color"><code>color/</code></a>: general color operations: <code>luma()</code>, <code>saturation()</code>, blend modes, palettes, color space conversion, and tonemaps.</li>
+	<li><a href="https://lygia.xyz/v1.1.4/animation"><code>animation/</code></a>: animation operations: easing</li>
+	<li><a href="https://lygia.xyz/v1.1.4/generative"><code>generative/</code></a>: generative functions: <code>random()</code>, <code>noise()</code>, etc. </li>
+	<li><a href="https://lygia.xyz/v1.1.4/sdf"><code>sdf/</code></a>: signed distance field functions.</li>
+	<li><a href="https://lygia.xyz/v1.1.4/draw"><code>draw/</code></a>: drawing functions like <code>digits()</code>, <code>stroke()</code>, <code>fill</code>, etc/.</li>
+	<li><a href="https://lygia.xyz/v1.1.4/sample"><code>sample/</code></a>: sample operations</li>
+	<li><a href="https://lygia.xyz/v1.1.4/filter"><code>filter/</code></a>: typical filter operations: different kind of blurs, mean and median filters.</li>
+	<li><a href="https://lygia.xyz/v1.1.4/distort"><code>distort/</code></a>: distort sampling operations</li>
+	<li><a href="https://lygia.xyz/v1.1.4/simulate"><code>simulate/</code></a>: simulate sampling operations</li>
+	<li><a href="https://lygia.xyz/v1.1.4/lighting"><code>lighting/</code></a>: different lighting models and functions for foward/deferred/raymarching rendering</li>
+	<li><a href="https://lygia.xyz/v1.1.4/geometry"><code>geometry/</code></a>: operation related to geometries: intersections and AABB accelerating structures.</li>
+	<li><a href="https://lygia.xyz/v1.1.4/morphological"><code>morphological/</code></a>: morphological filters: dilation, erosion, alpha and poisson fill.</li>
 </ul>
 
 ## hg_sdf

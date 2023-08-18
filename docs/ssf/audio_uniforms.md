@@ -6,7 +6,7 @@ Many of the uniforms rely on [FFT analysis](https://www.dataq.com/data-acquisiti
 
 ### Data Textures
 
-There are two textures which store different audio data in each channel. Here is a visualization of these 2DSamplers from the built-in Audio Indicators scene:
+There are two textures which store different audio data in each channel. Here is a visualization of these 1DSamplers from the built-in Audio Indicators scene:
 
 [![Audio Samplers](../src/images/audio_samplers.gif)](../src/images/audio_samplers.gif)
 
