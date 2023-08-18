@@ -3,7 +3,7 @@
 ### How can I save video output from Synesthesia?
 **macOS**
 
-The easiest way to save video output on a Mac is to use Syphon Recorder. [You can download it for free here](https://syphon.info/recorder).
+The easiest way to save video output on a Mac is to use Syphon Recorder. [You can download it for free here](https://syphon.github.io/recorder).
 
 1. Make sure the option "Syphon Output" is checked in the Settings panel in Synesthesia.
 2. Open Syphon Recorder. You should see a drop down menu in the bottom left.
