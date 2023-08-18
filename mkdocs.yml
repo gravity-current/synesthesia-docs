@@ -25,7 +25,7 @@ nav:
   - 'SSF Audio Uniforms': 'ssf/audio_uniforms.md'
   - 'SSF Standard Uniforms': 'ssf/standard_uniforms.md'
   - 'SSF Functions': 'ssf/functions.md'
-  - 'hg_sdf Library': 'ssf/hg_sdf.md'
+  - 'External Libraries': 'ssf/libraries.md'
   - 'JSON Configuration': 'ssf/json.md'
   - 'JavaScript Scripting': 'ssf/script.md'
   - 'Best Practices': 'ssf/best_practices.md'

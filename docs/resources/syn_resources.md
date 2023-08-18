@@ -13,11 +13,6 @@ Social Media Accounts
 - [Instagram](https://www.instagram.com/synesthesia.live/?hl=en)
 - [Twitter](https://twitter.com/synesthesia_gc)
 
-Documents
-
-- [User Manual](https://synesthesia.live/resources/user-guide.pdf?fbclid=IwAR3FMPC4uII1niawFc9Nn1DTA2ET6keLYZPRWh2HqRgkc45K9D3j1oxLyKg)
-- [Quickstart Guide](http://www.synesthesia.live/resources/quickstart-guide.pdf)
-
 Community Projects
 
 - [Synesthesia Ecosystem Repo](https://github.com/mattorp/synesthesia-ecosystem) by Matto
