@@ -3,9 +3,11 @@
 Here is a complete list of changelogs for every version of Synesthesia
 
 ## Current Version
-#### [v1.21.0](https://www.synesthesia.live/public-release/changelog/1.21.0.79.html)
+#### [v1.22.1](https://www.synesthesia.live/public-release/changelog/1.22.1.89.html)
 
 ## Previous Versions
+### 1.21
+#### [v1.21.0](https://www.synesthesia.live/public-release/changelog/1.21.0.79.html)
 ### 1.20
 #### [v1.20.1](https://www.synesthesia.live/public-release/changelog/1.20.1.72.html)
 #### [v1.20.0](https://www.synesthesia.live/public-release/changelog/1.20.0.66.html)
