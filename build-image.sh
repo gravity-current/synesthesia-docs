@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 #
 while getopts e:t:p: flag
 do
@@ -15,11 +15,6 @@ fi
 
 image=docs:$tag
 
-docker build -f Dockerfile -t $image . --no-cache
-docker tag "$image" "registry.digitalocean.com/syn/$image"
-if [ ! -z "$push" ]; then
-  echo "pushing $image to digital ocean repo"
-  docker push "registry.digitalocean.com/syn/$image"
-fi
+docker buildx build --platform linux/amd64 -f Dockerfile -t "registry.digitalocean.com/syn/$image" . --push
 
-echo "Built image. Run the image locally with command 'docker run --rm --name docs -p 9000:8000 -it $image' and access it at 'http://localhost:9000/docs/'"
+# echo "Built image. Run the image locally with command 'docker run --rm --name docs -p 9000:8000 -it $image' and access it at 'http://localhost:9000/docs/'"
