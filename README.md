@@ -6,21 +6,17 @@ The Synesthesia team would love your help in developing these docs!
 
 ## Dependencies
 
+Python 3 & pip
+node.js v20 & npm 
+
 [MKDocs](https://www.mkdocs.org/) — the library used to create the docs
-
-- Install with `pip install mkdocs` or `choco install mkdocs`
-
 [Material for MKDocs](https://squidfunk.github.io/mkdocs-material/) — the MKDocs theme that we use
-
-- Install with `pip install mkdocs-material` or `choco install mkdocs-material`
-
 [mkdocs-video](https://pypi.org/project/mkdocs-video/) - a plugin used to embed videos
-
-- Install with `pip install mkdocs-video`
-
 [Sass](https://sass-lang.com/) — used to style the docs
 
-- Will be installed with `npm install`. Can also install with `npm install -g sass` or `choco install sass`
+Install Python dependencies: `pip install -r requirements.txt`
+
+Install node dependencies: `npm install`
 
 ## Building
 
