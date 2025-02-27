@@ -2,8 +2,6 @@
 
 Welcome to the documentation for [Synesthesia](https://www.synesthesia.live/), an audio-reactive visual instrument used by VJs, musicians, and creative coders worldwide. 
 
-If you haven't yet downloaded Synesthesia, that's a good place to start ([Mac](https://production.synesthesia.live/mac/try)/[Windows](https://production.synesthesia.live/windows/try)). 
-
 <!-- ![banner](src/images/blu-glitch.png "Banner") -->
 <!-- <div style='text-align:center'>
   <video autoPlay loop muted width="600px">
@@ -12,9 +10,21 @@ If you haven't yet downloaded Synesthesia, that's a good place to start ([Mac](h
   </video>
 </div> -->
 
+## Frequently Asked Questions
+
+[Read the FAQ](https://app.synesthesia.live/docs/faq/)
+
+<< Navigate the FAQ by topic using the tabs on the left
+
+Don't see your question listed? Get one-on-one help from devs and users by joining our User Groups.
+
+[Discord Server](https://discord.gg/synesthesia)
+
+[Facebook Users Group](https://www.facebook.com/groups/synesthesialive)
+
 ## Creating Synesthesia Scenes
 
-Synesthesia is primarily a tool to run and perform with *scenes*, which are essentially GLSL fragment shaders that create visuals with code. If you're looking to create your own scenes, you can start with the documentation for the [Synesthesia Shader Format (SSF)](ssf/ssf.md). Be sure to check out the page on [SSF audio uniforms](ssf/audio_uniforms.md), which allow you to easily create audio reactive visuals.
+Synesthesia is a performance tool that allows you to perform real-time visuals that are also audio reactive and incorporate media. We call these *Scenes*, and under the hood they are GLSL fragment shaders that create visuals with code. If you're looking to create your own Scenes, you can start with the documentation for the [Synesthesia Shader Format (SSF)](ssf/ssf.md). Be sure to check out the page on [SSF audio uniforms](ssf/audio_uniforms.md), which allow you to easily create audio reactive visuals.
 
 You can also dive right in with the ["Getting Started" tutorial](./tutorials/first_scene.md), which will walk through creating your first scene.
 
@@ -22,5 +32,13 @@ To learn more about GLSL and fragment shaders, check out the [GLSL Resources pag
 
 ## More Resources
 
-Check out the [Synesthesia Resources page](./resources/syn_resources.md) for more links and information. 
+Download the latest version of Synesthesia: [Mac](https://production.synesthesia.live/mac/try) / [Windows](https://production.synesthesia.live/windows/try)
+
+[Download Old Versions](https://app.synesthesia.live/docs/resources/syn_installers.html)
+
+[Read the Changelogs](https://app.synesthesia.live/docs/resources/changelogs.html)
+
+Watch Video Tutorials on our [Youtube Channel](https://www.youtube.com/channel/UCN91NOZFK06VxOMbFw_-E2g)
+
+Check out the [Synesthesia Resources page](./resources/syn_resources.md) for more many more helpful links and information. 
 
